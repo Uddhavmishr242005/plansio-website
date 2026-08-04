@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout - PLANSIO</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .checkout-container { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
+    .checkout-wrapper { display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; margin-top: 2rem; }
+    .checkout-steps { background: #fff; border-radius: 12px; padding: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .step { margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid #e0e0e0; }
+    .step:last-child { border-bottom: none; }
+    .step-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+    .step-number { width: 36px; height: 36px; background: #1a5c2a; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+    .step-number.active { background: #2d8a3d; }
+    .step-number.completed { background: #4caf50; }
+    .step-title { font-size: 1.2rem; font-weight: 600; color: #333; }
+    .step-content { display: none; margin-top: 1rem; }
+    .step-content.active { display: block; }
+    
+    .form-group { margin-bottom: 1rem; }
+    .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; color: #333; }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 8px; font-size: 0.95rem; font-family: inherit; }
+    .form-group input:focus, .form-group select:focus { outline: none; border-color: #1a5c2a; box-shadow: 0 0 0 3px rgba(26,92,42,0.1); }
+    
+    .address-card { border: 2px solid #e0e0e0; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; cursor: pointer; transition: all 0.3s; }
+    .address-card.selected { border-color: #1a5c2a; background: #f0f8f5; }
+    .address-card input[type="radio"] { margin-right: 0.5rem; }
+    
+    .payment-option { display: flex; align-items: center; padding: 1rem; border: 2px solid #e0e0e0; border-radius: 8px; margin-bottom: 0.75rem; cursor: pointer; }
+    .payment-option input[type="radio"] { margin-right: 1rem; }
+    .payment-option.selected { border-color: #1a5c2a; background: #f0f8f5; }
+    
+    .order-summary { background: #fff; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1); position: sticky; top: 100px; }
+    .summary-item { display: flex; justify-content: space-between; margin-bottom: 0.75rem; font-size: 0.95rem; }
+    .summary-item.total { border-top: 2px solid #e0e0e0; padding-top: 0.75rem; font-weight: 600; font-size: 1.1rem; color: #1a5c2a; }
+    
+    .btn-next, .btn-prev { padding: 0.75rem 2rem; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+    .btn-next { background: #1a5c2a; color: white; }
+    .btn-next:hover { background: #2d8a3d; }
+    .btn-prev { background: #e0e0e0; color: #333; margin-right: 1rem; }
+    .btn-prev:hover { background: #d0d0d0; }
+    .step-buttons { display: flex; margin-top: 1.5rem; }
+    
+    .pincode-check { font-size: 0.85rem; color: #666; margin-top: 0.5rem; }
+    .pincode-check.available { color: #4caf50; }
+    .pincode-check.unavailable { color: #f44336; }
+    
+    .cart-item-mini { display: flex; gap: 1rem; padding: 1rem; background: #f5f5f5; border-radius: 8px; margin-bottom: 0.75rem; font-size: 0.9rem; }
+    .cart-item-mini img { width: 60px; height: 60px; object-fit: cover; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header id="navbar" class="navbar">
+    <div class="container nav-container">
+      <div class="nav-logo">
+        <a href="index.html" class="logo-link">🌿 PLANSIO</a>
+      </div>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="#" onclick="showCart()">Cart</a>
+        <a href="#" onclick="showMyOrders()">My Orders</a>
+      </nav>
+      <div class="nav-actions">
+        <button id="userBtn" class="btn-user" onclick="handleUser()">
+          <i class="fas fa-user-circle"></i> <span id="userName">Login</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="checkout-container">
+    <h1 style="margin-top: 2rem;">Checkout</h1>
+
+    <div class="checkout-wrapper">
+      <!-- Steps -->
+      <div class="checkout-steps">
+        <!-- Step 1: Cart Review -->
+        <div class="step">
+          <div class="step-header">
+            <div class="step-number active" id="step1Num">1</div>
+            <div class="step-title">Review Cart</div>
+          </div>
+          <div class="step-content active" id="step1Content">
+            <div id="cartItemsList"></div>
+            <div class="step-buttons">
+              <button class="btn-next" onclick="goToStep(2)">Proceed to Address</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2: Address -->
+        <div class="step">
+          <div class="step-header">
+            <div class="step-number" id="step2Num">2</div>
+            <div class="step-title">Delivery Address</div>
+          </div>
+          <div class="step-content" id="step2Content">
+            <div id="savedAddresses"></div>
+            <details style="margin-top: 1rem;">
+              <summary style="font-weight: 600; cursor: pointer;">Add New Address</summary>
+              <div style="margin-top: 1rem;">
+                <div class="form-group">
+                  <label>Full Name</label>
+                  <input type="text" id="addrName" placeholder="Your full name">
+                </div>
+                <div class="form-group">
+                  <label>Phone Number</label>
+                  <input type="tel" id="addrPhone" placeholder="10-digit phone">
+                </div>
+                <div class="form-group">
+                  <label>Address Line 1</label>
+                  <input type="text" id="addrLine1" placeholder="House no, building name">
+                </div>
+                <div class="form-group">
+                  <label>Address Line 2</label>
+                  <input type="text" id="addrLine2" placeholder="Road name, area, colony">
+                </div>
+                <div class="form-group">
+                  <label>Pincode</label>
+                  <input type="text" id="addrPincode" placeholder="6-digit pincode" onchange="checkPincode()">
+                  <div class="pincode-check" id="pincodeMsg"></div>
+                </div>
+                <div class="form-group">
+                  <label>City</label>
+                  <input type="text" id="addrCity" placeholder="City">
+                </div>
+                <div class="form-group">
+                  <label>State</label>
+                  <input type="text" id="addrState" placeholder="State">
+                </div>
+              </div>
+            </details>
+            <div class="step-buttons" style="margin-top: 1rem;">
+              <button class="btn-prev" onclick="goToStep(1)">Back</button>
+              <button class="btn-next" onclick="goToStep(3)">Proceed to Payment</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3: Payment -->
+        <div class="step">
+          <div class="step-header">
+            <div class="step-number" id="step3Num">3</div>
+            <div class="step-title">Payment Method</div>
+          </div>
+          <div class="step-content" id="step3Content">
+            <div id="paymentOptions"></div>
+            <div class="step-buttons" style="margin-top: 1rem;">
+              <button class="btn-prev" onclick="goToStep(2)">Back</button>
+              <button class="btn-next" onclick="placeOrder()" style="flex: 1;">Place Order</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Order Summary -->
+      <div class="order-summary">
+        <h3 style="margin-bottom: 1rem;">Order Summary</h3>
+        <div id="summaryContent"></div>
+      </div>
+    </div>
+  </main>
+
+  <script src="checkout.js"></script>
+</body>
+</html>

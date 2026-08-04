@@ -3,7 +3,12 @@ const Product = require('../models/Product.model');
 
 // ── Get Profile ───────────────────────────────
 exports.getProfile = async (req, res) => {
-  res.json({ success: true, user: req.user });
+  try {
+    const user = await User.findById(req.user._id).populate('wishlist', 'title price images');
+    res.json({ success: true, user });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
 };
 
 // ── Update Profile ────────────────────────────

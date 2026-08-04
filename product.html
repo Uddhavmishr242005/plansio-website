@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product - PLANSIO</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .product-page { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
+    .prod-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 2rem; }
+    .prod-image { background: #f5f5f5; border-radius: 12px; overflow: hidden; }
+    .prod-image img { width: 100%; height: auto; }
+    .prod-details h1 { font-size: 2rem; color: #333; margin-bottom: 0.5rem; }
+    .prod-rating { display: flex; gap: 0.5rem; align-items: center; margin-bottom: 1rem; color: #ffa500; }
+    .prod-price { font-size: 2.5rem; color: #1a5c2a; font-weight: bold; margin-bottom: 0.5rem; }
+    .prod-mrp { font-size: 1.1rem; color: #999; text-decoration: line-through; }
+    .prod-desc { color: #666; line-height: 1.6; margin: 1.5rem 0; }
+    .prod-features { background: #f0f8f5; padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0; }
+    .prod-features h3 { color: #1a5c2a; margin-bottom: 1rem; }
+    .prod-features li { margin: 0.5rem 0; color: #333; }
+    .qty-selector { display: flex; align-items: center; gap: 1rem; margin: 1.5rem 0; }
+    .qty-btn { width: 40px; height: 40px; border: 1px solid #ddd; background: #f5f5f5; border-radius: 4px; cursor: pointer; font-weight: bold; }
+    .qty-display { width: 60px; text-align: center; font-weight: bold; }
+    .actions { display: flex; gap: 1rem; margin: 2rem 0; }
+    .btn-add-cart { flex: 1; padding: 1rem; background: #e8f5ec; color: #1a5c2a; border: 2px solid #1a5c2a; border-radius: 8px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+    .btn-add-cart:hover { background: #1a5c2a; color: white; }
+    .btn-buy-now { flex: 1; padding: 1rem; background: #1a5c2a; color: white; border: none; border-radius: 8px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+    .btn-buy-now:hover { background: #2d8a3d; }
+    .prod-info { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 2rem 0; }
+    .info-card { background: #f9f9f9; padding: 1rem; border-radius: 8px; text-align: center; }
+    .info-card .icon { font-size: 1.5rem; color: #1a5c2a; margin-bottom: 0.5rem; }
+    .info-card p { font-size: 0.9rem; color: #666; }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header id="navbar" class="navbar">
+    <div class="container nav-container">
+      <div class="nav-logo">
+        <a href="index.html" class="logo-link">🌿 PLANSIO</a>
+      </div>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="#" onclick="showCart()">🛒 Cart</a>
+        <a href="#" onclick="showMyOrders()">📦 My Orders</a>
+      </nav>
+      <div class="nav-actions">
+        <button id="userBtn" class="btn-user" onclick="handleUser()">
+          <i class="fas fa-user-circle"></i> <span id="userName">Login</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Product Page -->
+  <main class="product-page">
+    <a href="index.html" style="color: #1a5c2a; margin-bottom: 1rem; display: inline-block;">← Back to Products</a>
+
+    <div class="prod-wrapper">
+      <!-- Image -->
+      <div class="prod-image">
+        <img id="prodImg" src="https://via.placeholder.com/400x400" alt="Product">
+      </div>
+
+      <!-- Details -->
+      <div class="prod-details">
+        <h1 id="prodTitle">Product Name</h1>
+        
+        <div class="prod-rating">
+          <span id="prodRating">★★★★★</span>
+          <span id="prodReviews">(0 reviews)</span>
+        </div>
+
+        <div>
+          <div class="prod-price">₹<span id="prodPrice">0</span></div>
+          <div class="prod-mrp">M.R.P: ₹<span id="prodMRP">0</span></div>
+        </div>
+
+        <p class="prod-desc" id="prodDesc">Product description here</p>
+
+        <!-- Features -->
+        <div class="prod-features">
+          <h3>✅ Key Features</h3>
+          <ul id="prodFeatures"></ul>
+        </div>
+
+        <!-- Quantity Selector -->
+        <div class="qty-selector">
+          <label>Quantity:</label>
+          <button class="qty-btn" onclick="changeQty(-1)">−</button>
+          <div class="qty-display" id="qtyDisplay">1</div>
+          <button class="qty-btn" onclick="changeQty(1)">+</button>
+        </div>
+
+        <!-- Actions -->
+        <div class="actions">
+          <button class="btn-add-cart" onclick="addToCartOnly()">
+            <i class="fas fa-shopping-cart"></i> Add to Cart
+          </button>
+          <button class="btn-buy-now" onclick="buyNow()">
+            <i class="fas fa-bolt"></i> Buy Now
+          </button>
+        </div>
+
+        <!-- Info Cards -->
+        <div class="prod-info">
+          <div class="info-card">
+            <div class="icon">🚚</div>
+            <p><strong>Free Shipping</strong> on orders above ₹499</p>
+          </div>
+          <div class="info-card">
+            <div class="icon">✅</div>
+            <p><strong>100% Organic</strong> & Lab Tested</p>
+          </div>
+          <div class="info-card">
+            <div class="icon">🎁</div>
+            <p><strong>Free Gift</strong> Neem Powder with every order</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer (minimal) -->
+  <footer class="footer" style="margin-top: 4rem;">
+    <div class="footer-inner">
+      <div class="container">
+        <p style="text-align: center; color: #666;">© 2024 PLANSIO - J.K. Enterprises | <a href="terms.html">Terms</a> | <a href="privacy.html">Privacy</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    let selectedQuantity = 1;
+    let currentProduct = null;
+
+    // Get product ID from URL
+    const params = new URLSearchParams(window.location.search);
+    const productId = params.get('id');
+
+    // Load product details
+    async function loadProduct() {
+      if (!productId) {
+        alert('Product not found');
+        return;
+      }
+
+      const res = await apiCall(`/products/${productId}`);
+      if (res?.success && res.product) {
+        currentProduct = res.product;
+        displayProduct();
+      } else {
+        alert('Could not load product');
+      }
+    }
+
+    function displayProduct() {
+      const p = currentProduct;
+      document.getElementById('prodTitle').textContent = p.title;
+      document.getElementById('prodDesc').textContent = p.description;
+      document.getElementById('prodPrice').textContent = p.price.toLocaleString();
+      document.getElementById('prodMRP').textContent = (p.mrp || p.price * 1.5).toLocaleString();
+      document.getElementById('prodImg').src = p.images?.[0]?.url || 'https://via.placeholder.com/400x400';
+      document.getElementById('prodRating').textContent = '★'.repeat(Math.ceil(p.rating || 4)) + '☆'.repeat(5 - Math.ceil(p.rating || 4));
+      document.getElementById('prodReviews').textContent = `(${p.numReviews || 0} reviews)`;
+
+      const featurList = document.getElementById('prodFeatures');
+      featurList.innerHTML = (p.features || []).map(f => `<li>${f}</li>`).join('');
+    }
+
+    function changeQty(delta) {
+      selectedQuantity = Math.max(1, Math.min(50, selectedQuantity + delta));
+      document.getElementById('qtyDisplay').textContent = selectedQuantity;
+    }
+
+    async function addToCartOnly() {
+      const res = await apiCall('/cart/add', 'POST', { 
+        productId: currentProduct._id, 
+        quantity: selectedQuantity 
+      });
+      if (res?.success) {
+        alert(`✅ ${selectedQuantity}x ${currentProduct.title} added to cart!`);
+      }
+    }
+
+    async function buyNow() {
+      const res = await apiCall('/cart/add', 'POST', { 
+        productId: currentProduct._id, 
+        quantity: selectedQuantity 
+      });
+      if (res?.success) {
+        window.location.href = '/checkout.html';
+      }
+    }
+
+    // Load on page load
+    document.addEventListener('DOMContentLoaded', loadProduct);
+  </script>
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Orders - PLANSIO</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .my-orders-page { max-width: 1000px; margin: 2rem auto; padding: 0 1rem; }
+    .orders-container { margin-top: 2rem; }
+    .order-card { background: #fff; border: 1px solid #e0e0e0; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; cursor: pointer; transition: all 0.3s; }
+    .order-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .order-header { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .order-field { }
+    .order-label { font-size: 0.85rem; color: #999; text-transform: uppercase; font-weight: 600; }
+    .order-value { font-size: 1.1rem; font-weight: 600; color: #333; margin-top: 0.25rem; }
+    .order-id { color: #1a5c2a; }
+    .status-badge { display: inline-block; padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
+    .status-pending { background: #fff3cd; color: #856404; }
+    .status-confirmed { background: #d1ecf1; color: #0c5460; }
+    .status-shipped { background: #cfe2ff; color: #084298; }
+    .status-delivered { background: #d1e7dd; color: #0f5132; }
+    .status-cancelled { background: #f8d7da; color: #842029; }
+    .order-items { background: #f9f9f9; padding: 1rem; border-radius: 8px; margin: 1rem 0; }
+    .item-mini { display: flex; justify-content: space-between; padding: 0.5rem 0; font-size: 0.95rem; }
+    .order-actions { display: flex; gap: 0.5rem; margin-top: 1rem; }
+    .btn-action { padding: 0.5rem 1rem; border: 1px solid #ddd; background: #f5f5f5; border-radius: 6px; cursor: pointer; font-size: 0.9rem; transition: all 0.3s; }
+    .btn-action:hover { background: #e0e0e0; }
+    .btn-track { background: #1a5c2a; color: white; border: none; }
+    .btn-track:hover { background: #2d8a3d; }
+    .empty-state { text-align: center; padding: 3rem 2rem; }
+    .empty-icon { font-size: 3rem; color: #ccc; margin-bottom: 1rem; }
+    .empty-text { color: #999; margin-bottom: 1.5rem; }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header id="navbar" class="navbar">
+    <div class="container nav-container">
+      <div class="nav-logo">
+        <a href="index.html" class="logo-link">🌿 PLANSIO</a>
+      </div>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="#" onclick="showCart()">🛒 Cart</a>
+      </nav>
+      <div class="nav-actions">
+        <button id="userBtn" class="btn-user" onclick="handleUser()">
+          <i class="fas fa-user-circle"></i> <span id="userName">Profile</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- My Orders Page -->
+  <main class="my-orders-page">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+      <h1>📦 My Orders</h1>
+      <button onclick="location.href='index.html#products'" class="btn-primary" style="padding:0.75rem 1.5rem">← Continue Shopping</button>
+    </div>
+
+    <!-- Search & Filter -->
+    <div style="background: #fff; padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+      <input type="text" id="searchOrder" placeholder="🔍 Search Order ID or Phone..." onkeyup="filterOrders()" style="flex: 1; min-width: 200px; padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px;">
+      <select id="filterStatus" onchange="filterOrders()" style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px;">
+        <option value="">All Status</option>
+        <option value="Pending">Pending</option>
+        <option value="Confirmed">Confirmed</option>
+        <option value="Shipped">Shipped</option>
+        <option value="Delivered">Delivered</option>
+        <option value="Cancelled">Cancelled</option>
+      </select>
+    </div>
+
+    <div class="orders-container" id="ordersContainer">
+      <div class="empty-state">
+        <div class="empty-icon">📦</div>
+        <p class="empty-text">Loading your orders...</p>
+      </div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    async function loadMyOrders() {
+      if (!authToken) {
+        document.getElementById('ordersContainer').innerHTML = `
+          <div class="empty-state">
+            <p class="empty-text">Please <strong>login</strong> to view your orders</p>
+            <button onclick="handleUser()" class="btn-primary" style="padding:0.75rem 1.5rem">Login</button>
+          </div>
+        `;
+        return;
+      }
+
+      const res = await apiCall('/orders/my');
+      if (res?.success && res.orders?.length) {
+        allOrders = res.orders;
+        renderOrders(allOrders);
+      } else {
+        document.getElementById('ordersContainer').innerHTML = `
+          <div class="empty-state">
+            <div class="empty-icon">📭</div>
+            <p class="empty-text">No orders yet</p>
+            <a href="index.html" class="btn-primary" style="padding:0.75rem 1.5rem; text-decoration:none; display:inline-block">Start Shopping</a>
+          </div>
+        `;
+      }
+    }
+
+    function viewOrderDetails(orderId) {
+      window.location.href = `/order-confirmation.html?id=${orderId}`;
+    }
+
+    function reviewProduct(orderId) {
+      alert('Review feature coming soon! Order: ' + orderId);
+    }
+
+    function cancelOrder(orderId) {
+      if (confirm('Cancel this order?')) {
+        apiCall(`/orders/${orderId}/cancel`, 'PUT', { reason: 'Customer cancelled' })
+          .then(res => {
+            if (res?.success) {
+              alert('✅ Order cancelled');
+              location.reload();
+            } else {
+              alert('❌ Could not cancel order');
+            }
+          });
+      }
+    }
+
+    function downloadInvoice(orderId) {
+      alert('📄 Invoice download coming soon! Order: ' + orderId);
+    }
+
+    // Filter orders
+    let allOrders = [];
+    function filterOrders() {
+      const search = document.getElementById('searchOrder')?.value?.toLowerCase() || '';
+      const status = document.getElementById('filterStatus')?.value || '';
+      
+      const filtered = allOrders.filter(o => {
+        const matchSearch = !search || o.orderId.toLowerCase().includes(search);
+        const matchStatus = !status || o.status === status;
+        return matchSearch && matchStatus;
+      });
+
+      renderOrders(filtered);
+    }
+
+    function renderOrders(orders) {
+      if (!orders.length) {
+        document.getElementById('ordersContainer').innerHTML = `
+          <div class="empty-state">
+            <div class="empty-icon">📭</div>
+            <p class="empty-text">No orders found</p>
+          </div>
+        `;
+        return;
+      }
+
+      document.getElementById('ordersContainer').innerHTML = orders.map(o => `
+        <div class="order-card" onclick="viewOrderDetails('${o._id}')">
+          <div class="order-header">
+            <div class="order-field">
+              <div class="order-label">Order ID</div>
+              <div class="order-value order-id">${o.orderId}</div>
+            </div>
+            <div class="order-field">
+              <div class="order-label">Date</div>
+              <div class="order-value">${new Date(o.createdAt).toLocaleDateString('en-IN')}</div>
+            </div>
+            <div class="order-field">
+              <div class="order-label">Total</div>
+              <div class="order-value">₹${o.pricing.total.toLocaleString()}</div>
+            </div>
+            <div class="order-field">
+              <div class="order-label">Status</div>
+              <div class="order-value">
+                <span class="status-badge status-${o.status.toLowerCase().replace(/\s+/g, '-')}">${o.status}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="order-items">
+            <strong style="color:#666">Items:</strong>
+            ${o.items.map(i => `
+              <div class="item-mini">
+                <span>${i.name} x${i.quantity}</span>
+                <span>₹${(i.price * i.quantity).toLocaleString()}</span>
+              </div>
+            `).join('')}
+          </div>
+
+          <div class="order-actions">
+            <button class="btn-action btn-track" onclick="viewOrderDetails('${o._id}'); event.stopPropagation();">
+              <i class="fas fa-map"></i> Track Order
+            </button>
+            ${o.status === 'Delivered' ? `
+              <button class="btn-action" onclick="reviewProduct('${o._id}'); event.stopPropagation();">
+                <i class="fas fa-star"></i> Review
+              </button>
+            ` : ''}
+            ${['Pending', 'Confirmed'].includes(o.status) ? `
+              <button class="btn-action" onclick="cancelOrder('${o._id}'); event.stopPropagation();">
+                <i class="fas fa-times"></i> Cancel
+              </button>
+            ` : ''}
+            <button class="btn-action" onclick="downloadInvoice('${o._id}'); event.stopPropagation();">
+              <i class="fas fa-download"></i> Invoice
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+  </script>
+</body>
+</html>
+
+    document.addEventListener('DOMContentLoaded', () => {
+      if (!authToken) {
+        document.getElementById('userName').textContent = 'Login';
+      }
+      loadMyOrders();
+    });
+  </script>
+</body>
+</html>

@@ -38,7 +38,7 @@
       <a href="#combo">Combo Pack</a>
       <a href="about.html">About Us</a>
       <a href="contact.html">Contact</a>
-      <a href="#order" class="navbar-cta">Order Now <i class="fa fa-arrow-right"></i></a>
+      <a href="index.html#products" class="navbar-cta">Order Now <i class="fa fa-arrow-right"></i></a>
     </nav>
     <button class="navbar-ham" id="navHam"><span></span><span></span><span></span></button>
   </div>
@@ -57,7 +57,7 @@
     <a href="#combo" onclick="closeMob()"><i class="fa fa-gift"></i> Combo Pack</a>
     <a href="about.html" onclick="closeMob()"><i class="fa fa-building"></i> About Us</a>
     <a href="contact.html" onclick="closeMob()"><i class="fa fa-envelope"></i> Contact</a>
-    <a href="#order" onclick="closeMob()" class="mob-cta-btn"><i class="fa fa-shopping-cart"></i> Order Now</a>
+    <a href="index.html#products" onclick="closeMob()" class="mob-cta-btn"><i class="fa fa-shopping-cart"></i> Order Now</a>
   </nav>
   <div class="mob-contact">
     <a href="tel:9358572425"><i class="fa fa-phone"></i> 9358572425</a>
@@ -68,9 +68,15 @@
 <!-- HERO SLIDER -->
 <section class="hero-banner" id="hero">
   <div class="hero-slider" id="heroSlider">
-    <div class="hero-slide"><div class="slide-no-img"><div class="slide-no-img-text"><p>Hero Banner 1</p><small>Upload from Admin → Images → Slide 1</small><a href="admin.html" class="btn-green" style="margin-top:1rem;font-size:.85rem">Upload Image</a></div></div></div>
-    <div class="hero-slide"><div class="slide-no-img"><div class="slide-no-img-text"><p>Hero Banner 2</p><small>Upload from Admin → Images → Slide 2</small><a href="admin.html" class="btn-green" style="margin-top:1rem;font-size:.85rem">Upload Image</a></div></div></div>
-    <div class="hero-slide"><div class="slide-no-img"><div class="slide-no-img-text"><p>Hero Banner 3</p><small>Upload from Admin → Images → Slide 3</small><a href="admin.html" class="btn-green" style="margin-top:1rem;font-size:.85rem">Upload Image</a></div></div></div>
+    <div class="hero-slide">
+      <img src="images/slide1.jpg" alt="PLANSIO Vermicompost" class="hero-slide-img"/>
+    </div>
+    <div class="hero-slide">
+      <img src="images/slide2.jpg" alt="PLANSIO Worm Activity" class="hero-slide-img"/>
+    </div>
+    <div class="hero-slide">
+      <img src="images/slide3.jpg" alt="PLANSIO From waste to growth" class="hero-slide-img"/>
+    </div>
   </div>
   <button class="hslider-prev" id="hPrev"><i class="fa fa-chevron-left"></i></button>
   <button class="hslider-next" id="hNext"><i class="fa fa-chevron-right"></i></button>
@@ -282,144 +288,118 @@
   </div>
 </section>
 
-<!-- VIDEO SECTION - Instagram Reels Style (products ke beech mein) -->
-<section class="video-sec" id="videos">
+<!-- HERO SECTION WITH SERVICES -->
+<section class="hero-services-section">
   <div class="container">
-    <div class="sec-head">
-      <p class="sec-label">🎥 Watch & Learn</p>
-      <h2>PLANSIO in Action</h2>
-      <p>See real results from our customers</p>
+    <div class="hero-services-head">
+      <h1>What are you looking for?</h1>
+      <p>Premium Organic Fertilizer Solutions for Indian Farmers & Gardeners</p>
     </div>
-    <div class="video-reel-row" id="videoReelRow">
-      <!-- Video 1 -->
-      <div class="video-reel-card" id="vcard-1">
-        <div class="vrc-inner" id="vinner-1">
-          <div class="vrc-placeholder">
-            <div class="vrc-ph-ico">🎬</div>
-            <p>Video 1</p>
-            <small>Upload from Admin → Videos</small>
-          </div>
-        </div>
-        <div class="vrc-info">
-          <p class="vrc-title" id="vtitle-1">PLANSIO Vermicompost Results</p>
-          <span class="vrc-tag">🌱 Organic Farming</span>
-        </div>
+    
+    <!-- SERVICES GRID (4 COLUMNS) -->
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-card-ico">🌿</div>
+        <h3>Vermicompost 1KG</h3>
+        <p>Premium deep-nutrient organic fertilizer for your garden plants.</p>
+        <p class="service-price">₹299 <del>₹499</del></p>
       </div>
-      <!-- Video 2 -->
-      <div class="video-reel-card" id="vcard-2">
-        <div class="vrc-inner" id="vinner-2">
-          <div class="vrc-placeholder">
-            <div class="vrc-ph-ico">🎬</div>
-            <p>Video 2</p>
-            <small>Upload from Admin → Videos</small>
-          </div>
-        </div>
-        <div class="vrc-info">
-          <p class="vrc-title" id="vtitle-2">How to Use PLANSIO</p>
-          <span class="vrc-tag">📋 Tutorial</span>
-        </div>
+      
+      <div class="service-card">
+        <div class="service-card-ico">🌾</div>
+        <h3>Vermicompost 5KG</h3>
+        <p>Economy pack for larger gardens. Save 33% with this value pack.</p>
+        <p class="service-price">₹999 <del>₹1,499</del></p>
       </div>
-      <!-- Video 3 -->
-      <div class="video-reel-card" id="vcard-3">
-        <div class="vrc-inner" id="vinner-3">
-          <div class="vrc-placeholder">
-            <div class="vrc-ph-ico">🎬</div>
-            <p>Video 3</p>
-            <small>Upload from Admin → Videos</small>
-          </div>
-        </div>
-        <div class="vrc-info">
-          <p class="vrc-title" id="vtitle-3">Customer Reviews</p>
-          <span class="vrc-tag">⭐ Reviews</span>
-        </div>
+      
+      <div class="service-card">
+        <div class="service-card-ico">🛡️</div>
+        <h3>Neem Powder</h3>
+        <p>Natural pest control. FREE with every Vermicompost order!</p>
+        <p class="service-price" style="color:#2ecc71">FREE</p>
+      </div>
+      
+      <div class="service-card">
+        <div class="service-card-ico">🎁</div>
+        <h3>Combo Pack</h3>
+        <p>2× Vermicompost + 2× Neem Powder. Best value for money!</p>
+        <p class="service-price">₹549 <del>₹796</del></p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ORDER SECTION -->
-<section class="sec order-sec" id="order">
+<!-- LEAD CAPTURE SECTION -->
+<section class="lead-capture-section">
   <div class="container">
-    <div class="order-layout">
-      <div class="order-form-card">
-        <div class="ofc-header"><h3><i class="fa fa-shopping-cart"></i> Fill Order Details</h3></div>
-        <form id="orderForm" onsubmit="submitOrder(event)" novalidate>
-          <div class="fg-row">
-            <div class="fg"><label>Full Name *</label><input type="text" id="o-name" placeholder="Your full name" required/></div>
-            <div class="fg"><label>Phone Number *</label><input type="tel" id="o-phone" placeholder="10-digit mobile number" required/></div>
-          </div>
-          <div class="fg-row">
-            <div class="fg">
-              <label>Select Product *</label>
-              <select id="o-product" required onchange="calcTotal()">
-                <option value="">— Select Pack —</option>
-                <option value="PLANSIO Vermicompost 1KG|299">Vermicompost 1KG — ₹299</option>
-                <option value="PLANSIO Vermicompost 5KG|999">Vermicompost 5KG — ₹999</option>
-                <option value="PLANSIO Combo Pack (2VC+2NP)|549">Combo Pack 2VC+2NP — ₹549</option>
-              </select>
-            </div>
-            <div class="fg">
-              <label>Quantity *</label>
-              <div class="qty-ctrl">
-                <button type="button" onclick="changeQty(-1)">−</button>
-                <input type="number" id="o-qty" value="1" min="1" max="50" readonly/>
-                <button type="button" onclick="changeQty(1)">+</button>
-              </div>
-            </div>
-          </div>
-          <div class="fg"><label>Delivery Address *</label><textarea id="o-address" rows="3" placeholder="House No, Street, City, District, State, PIN Code" required></textarea></div>
-          <div class="fg-row">
-            <div class="fg"><label>Email (Optional)</label><input type="email" id="o-email" placeholder="your@email.com"/></div>
-            <div class="fg"><label>Payment Method</label>
-              <select id="o-payment" onchange="showPayInfo(this.value)">
-                <option value="COD">Cash on Delivery</option>
-                <option value="UPI">UPI / PhonePe / GPay</option>
-                <option value="Bank">Bank Transfer</option>
-              </select>
-            </div>
-          </div>
-          <div class="pay-info active" id="pay-COD"><i class="fa fa-info-circle"></i> Pay cash when order arrives. No advance needed.</div>
-          <div class="pay-info" id="pay-UPI"><i class="fa fa-mobile-alt"></i> UPI ID: <strong>Plansio.Jk@okicici</strong> <button type="button" onclick="copyUPI()">Copy</button></div>
-          <div class="pay-info" id="pay-Bank"><i class="fa fa-university"></i> Bank details shared after confirmation. Share UTR: <a href="https://wa.me/919358572425">WhatsApp</a></div>
-          <div class="fg"><label>Notes / UTR (Optional)</label><textarea id="o-notes" rows="2" placeholder="Transaction ID or delivery instructions..."></textarea></div>
-          <div class="order-total">
-            <div class="ot-left">
-              <span>Product: <strong id="otAmt">₹0</strong></span>
-              <span>Delivery: <strong class="green">FREE 🚚</strong></span>
-              <span>Neem Powder: <strong class="green">FREE 🎁</strong></span>
-            </div>
-            <div class="ot-right">Total: <strong id="otTotal">₹0</strong></div>
-          </div>
-          <button type="submit" class="btn-order"><i class="fa fa-shopping-cart"></i> Place Order</button>
-          <p class="secure-note"><i class="fa fa-lock"></i> Your info is safe. We'll call to confirm.</p>
-        </form>
-      </div>
-      <div class="order-side">
-        <div class="os-card os-gift">
-          <div class="osg-ico">🎁</div>
-          <h4>FREE with Every Order</h4>
-          <p>PLANSIO <strong>Neem Powder 50g</strong> (worth ₹99) — auto included!</p>
+    <div class="lead-capture-wrapper">
+      <!-- Left Side: Info -->
+      <div class="lead-info-box">
+        <h2>Get Expert Gardening Tips & Offers</h2>
+        <p>Join 10,000+ farmers & gardeners already using PLANSIO for healthier soil and better harvests.</p>
+        
+        <div class="lead-benefits">
+          <p><i class="fa fa-check-circle"></i> <strong>100% Organic Certified</strong></p>
+          <p><i class="fa fa-check-circle"></i> <strong>Lab Tested Quality</strong></p>
+          <p><i class="fa fa-check-circle"></i> <strong>Free Delivery Above ₹499</strong></p>
+          <p><i class="fa fa-check-circle"></i> <strong>24/7 Support</strong></p>
         </div>
-        <div class="os-card">
-          <h4>Why Order from Us?</h4>
-          <ul>
-            <li><i class="fa fa-truck"></i> Pan India fast delivery</li>
-            <li><i class="fa fa-money-bill-wave"></i> Cash on Delivery</li>
-            <li><i class="fa fa-certificate"></i> 100% Organic, lab tested</li>
-            <li><i class="fa fa-gift"></i> Free Neem Powder every order</li>
-            <li><i class="fa fa-headset"></i> Dedicated support</li>
-          </ul>
-        </div>
-        <div class="os-card os-contact">
-          <h4>Need Help?</h4>
-          <a href="tel:9358572425"><i class="fa fa-phone"></i> 9358572425</a>
-          <a href="mailto:Plansio.Jk@gmail.com"><i class="fa fa-envelope"></i> Plansio.Jk@gmail.com</a>
-          <a href="https://wa.me/919358572425" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp Us</a>
+        
+        <div class="lead-contact">
+          <p><strong>📞 Call us:</strong> <a href="tel:9358572425">9358572425</a></p>
+          <p><strong>⏰ Hours:</strong> Mon - Sat | 9:00 AM - 6:00 PM</p>
+          <p><strong>💬 WhatsApp:</strong> <a href="https://wa.me/919358572425">Chat Now</a></p>
         </div>
       </div>
+      
+      <!-- Right Side: Form -->
+      <form class="lead-form" id="leadForm" onsubmit="handleLeadSubmit(event)">
+        <h3>Get Your PLANSIO Order</h3>
+        
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" name="name" placeholder="Your name" required />
+        </div>
+        
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" name="phone" placeholder="+91 9876543210" required />
+        </div>
+        
+        <div class="form-group">
+          <label>Location / City</label>
+          <select name="location" required>
+            <option value="">Select Your Location</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Pune">Pune</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Bangalore">Bangalore</option>
+            <option value="Hyderabad">Hyderabad</option>
+            <option value="Chennai">Chennai</option>
+            <option value="Other">Other (COD Available)</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label>Product Interest</label>
+          <select name="product" required>
+            <option value="">Select Product</option>
+            <option value="Vermicompost 1KG">Vermicompost 1KG - ₹299</option>
+            <option value="Vermicompost 5KG">Vermicompost 5KG - ₹999</option>
+            <option value="Neem Powder">Neem Powder - FREE</option>
+            <option value="Combo Pack">Combo Pack - ₹549</option>
+          </select>
+        </div>
+        
+        <button type="submit" class="btn-submit">Get Order Link <i class="fa fa-arrow-right"></i></button>
+        <p style="font-size:0.85rem; color:#666; margin-top:1rem; text-align:center;">
+          ✅ 100% Secure • No spam • We'll call within 24 hours
+        </p>
+      </form>
     </div>
   </div>
 </section>
+
 
 <!-- FOOTER -->
 <footer class="footer">
@@ -449,7 +429,7 @@
           <a href="about.html"><i class="fa fa-building"></i> About Us</a>
           <a href="contact.html"><i class="fa fa-envelope"></i> Contact Us</a>
           <a href="howto.html"><i class="fa fa-list-ol"></i> How to Use</a>
-          <a href="#order"><i class="fa fa-shopping-cart"></i> Order Now</a>
+          <a href="index.html#products"><i class="fa fa-shopping-cart"></i> Shop Now</a>
           <a href="admin.html"><i class="fa fa-lock"></i> Admin</a>
         </div>
         <div class="footer-col">
