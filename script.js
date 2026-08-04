@@ -1,263 +1,359 @@
 /* ============================================
-   PLANSIO - Complete Script
+   PLANSIO - Main Website Script (FIXED)
    ============================================ */
 
-// ============================================
-// NAVBAR
-// ============================================
-const hamburger = document.getElementById('hamburger');
-const mobDrawer  = document.getElementById('mobDrawer');
-const mobOverlay = document.getElementById('mobOverlay');
+// ---- HERO SLIDER ----
+(function(){
+  const slider = document.getElementById('heroSlider');
+  if(!slider) return;
+  const slides = slider.querySelectorAll('.hero-slide');
+  const dots   = document.querySelectorAll('.hdot');
+  const prev   = document.getElementById('hPrev');
+  const next   = document.getElementById('hNext');
+  let cur = 0, timer;
 
-function openMob()  { mobDrawer.classList.add('open'); mobOverlay.classList.add('open'); hamburger.classList.add('open'); document.body.style.overflow = 'hidden'; }
-function closeMob() { mobDrawer.classList.remove('open'); mobOverlay.classList.remove('open'); hamburger.classList.remove('open'); document.body.style.overflow = ''; }
+  function goTo(n){
+    cur = (n + slides.length) % slides.length;
+    slider.style.transform = `translateX(-${cur * 100}%)`;
+    dots.forEach((d,i) => d.classList.toggle('active', i===cur));
+  }
+  function start(){ timer = setInterval(()=>goTo(cur+1), 4500); }
+  function reset(){ clearInterval(timer); start(); }
 
-if (hamburger) hamburger.addEventListener('click', () => mobDrawer.classList.contains('open') ? closeMob() : openMob());
+  prev?.addEventListener('click', ()=>{ goTo(cur-1); reset(); });
+  next?.addEventListener('click', ()=>{ goTo(cur+1); reset(); });
+  dots.forEach((d,i) => d.addEventListener('click', ()=>{ goTo(i); reset(); }));
+  start();
+})();
 
-// Sticky shadow
-window.addEventListener('scroll', () => {
-  const nav = document.getElementById('navbar');
-  if (nav) nav.style.boxShadow = window.scrollY > 10 ? '0 4px 20px rgba(0,0,0,0.13)' : '0 2px 12px rgba(0,0,0,0.07)';
+// ---- NAVBAR ----
+const navHam  = document.getElementById('navHam');
+const mobMenu = document.getElementById('mobMenu');
+const mobBg   = document.getElementById('mobBg');
+
+function closeMob(){
+  mobMenu?.classList.remove('open');
+  mobBg?.classList.remove('open');
+  navHam?.classList.remove('open');
+}
+navHam?.addEventListener('click', ()=>{
+  mobMenu.classList.add('open');
+  mobBg.classList.add('open');
+  navHam.classList.add('open');
 });
 
-// ============================================
-// SCROLL ANIMATIONS (data-aos)
-// ============================================
-function initAOS() {
-  const els = document.querySelectorAll('[data-aos]');
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        const delay = e.target.dataset.aosDelay || 0;
-        setTimeout(() => e.target.classList.add('aos-animate'), parseInt(delay));
-        obs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-  els.forEach(el => obs.observe(el));
+window.addEventListener('scroll', ()=>{
+  const nav = document.getElementById('navbar');
+  if(nav) nav.style.boxShadow = window.scrollY > 10
+    ? '0 4px 20px rgba(0,0,0,.10)' : 'none';
+});
+
+// ---- PAYMENT SWITCH ----
+function showPayInfo(val){
+  document.querySelectorAll('.pay-info').forEach(el=>el.classList.remove('active'));
+  document.getElementById('pay-'+val)?.classList.add('active');
 }
 
-// ============================================
-// PAYMENT METHOD SWITCHER
-// ============================================
-function switchPayment(method) {
-  // Update selected styling
-  ['cod','upi','bank'].forEach(m => {
-    const lbl = document.getElementById('pml-' + m);
-    if (lbl) lbl.classList.remove('selected');
-  });
-  const map = { COD: 'cod', UPI: 'upi', 'Bank Transfer': 'bank' };
-  const selLbl = document.getElementById('pml-' + map[method]);
-  if (selLbl) selLbl.classList.add('selected');
-
-  // Show correct info panel
-  ['COD','UPI','Bank'].forEach(m => {
-    const panel = document.getElementById('pi-' + m);
-    if (panel) panel.classList.add('hidden');
-  });
-  const key = method === 'Bank Transfer' ? 'Bank' : method;
-  const active = document.getElementById('pi-' + key);
-  if (active) active.classList.remove('hidden');
-}
-
-// ============================================
-// QUANTITY CONTROL
-// ============================================
-function changeQty(delta) {
+// ---- QTY ----
+function changeQty(delta){
   const inp = document.getElementById('o-qty');
-  if (!inp) return;
-  const current = parseInt(inp.value) || 1;
-  const newVal = Math.min(50, Math.max(1, current + delta));
-  inp.value = newVal;
+  if(!inp) return;
+  inp.value = Math.max(1, Math.min(50, parseInt(inp.value)+delta));
   calcTotal();
 }
 
-// ============================================
-// ORDER TOTAL CALCULATOR
-// ============================================
-function calcTotal() {
+// ---- ORDER TOTAL ----
+function calcTotal(){
   const sel = document.getElementById('o-product');
-  const qty = parseInt(document.getElementById('o-qty')?.value) || 1;
-  const prodAmt = document.getElementById('otProductAmt');
-  const grandTotal = document.getElementById('otGrandTotal');
-  if (!sel || !prodAmt || !grandTotal) return;
-  if (!sel.value) { prodAmt.textContent = '₹0'; grandTotal.textContent = '₹0'; return; }
-  const price = parseInt(sel.value.split('|')[1]) || 0;
-  const total = price * qty;
-  prodAmt.textContent  = '₹' + total.toLocaleString('en-IN');
-  grandTotal.textContent = '₹' + total.toLocaleString('en-IN');
+  const qty = parseInt(document.getElementById('o-qty')?.value)||1;
+  const amtEl  = document.getElementById('otAmt');
+  const totEl  = document.getElementById('otTotal');
+  if(!sel||!amtEl||!totEl) return;
+  if(!sel.value){ amtEl.textContent='₹0'; totEl.textContent='₹0'; return; }
+  const price = parseInt(sel.value.split('|')[1])||0;
+  const total = price*qty;
+  amtEl.textContent = '₹'+total.toLocaleString('en-IN');
+  totEl.textContent = '₹'+total.toLocaleString('en-IN');
 }
 
-// ============================================
-// COPY TO CLIPBOARD
-// ============================================
-function copyText(text, label) {
-  navigator.clipboard.writeText(text).then(() => {
-    showToast('✅ ' + (label || text) + ' copied!');
-  }).catch(() => {
-    // Fallback
-    const el = document.createElement('textarea');
-    el.value = text;
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
-    showToast('✅ Copied!');
-  });
+// ---- COPY UPI ----
+function copyUPI(){
+  navigator.clipboard?.writeText('Plansio.Jk@okicici').catch(()=>{});
+  showToast('✅ UPI ID copied!');
 }
 
-// ============================================
-// FORM VALIDATION
-// ============================================
-function validateForm() {
-  const name    = document.getElementById('o-name').value.trim();
-  const phone   = document.getElementById('o-phone').value.trim();
-  const product = document.getElementById('o-product').value;
-  const address = document.getElementById('o-address').value.trim();
-
-  if (!name) { showToast('⚠️ Please enter your full name'); document.getElementById('o-name').focus(); return false; }
-  if (!phone || !/^[6-9][0-9]{9}$/.test(phone)) { showToast('⚠️ Enter a valid 10-digit mobile number'); document.getElementById('o-phone').focus(); return false; }
-  if (!product) { showToast('⚠️ Please select a product'); document.getElementById('o-product').focus(); return false; }
-  if (!address || address.length < 10) { showToast('⚠️ Please enter a complete delivery address'); document.getElementById('o-address').focus(); return false; }
-  return true;
-}
-
-// ============================================
-// SUBMIT ORDER
-// ============================================
-function submitOrder(e) {
+// ---- CATEGORY FILTER ----
+function filterCat(e, cat){
   e.preventDefault();
-  if (!validateForm()) return;
+  document.querySelectorAll('.cat-item').forEach(el=>el.classList.remove('cat-selected'));
+  e.currentTarget.classList.add('cat-selected');
 
-  const name    = document.getElementById('o-name').value.trim();
-  const phone   = document.getElementById('o-phone').value.trim();
-  const email   = document.getElementById('o-email')?.value.trim() || '';
-  const prodVal = document.getElementById('o-product').value;
-  const qty     = parseInt(document.getElementById('o-qty').value) || 1;
-  const address = document.getElementById('o-address').value.trim();
-  const payment = document.querySelector('input[name="payment"]:checked')?.value || 'COD';
-  const notes   = document.getElementById('o-notes')?.value.trim() || '';
+  const banner = document.getElementById('comingSoonBanner');
+  const title  = document.getElementById('pgrid-title');
 
-  const [product, priceStr] = prodVal.split('|');
-  const price  = parseInt(priceStr) || 0;
-  const amount = price * qty;
-  const orderId = 'PL-' + Date.now().toString().slice(-7);
-  const now = new Date();
-  const date = now.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+  const names = {
+    all:'All Products', fertiliser:'Fertilisers', pestcontrol:'Pest Control',
+    combo:'Combo Pack', plants:'Plants', soils:'Soils', seeds:'Seeds',
+    tools:'Garden Tools', watering:'Watering', pots:'Pots'
+  };
+  const soon = ['plants','soils','seeds','tools','watering','pots'];
 
-  const order = { id: orderId, date, name, phone, email, product, qty, amount, payment, address, notes, status: 'Pending' };
-
-  // Save to localStorage (admin panel reads this)
-  try {
-    const saved = localStorage.getItem('plansio_admin_data');
-    const data = saved ? JSON.parse(saved) : {};
-    if (!data.orders) data.orders = [];
-    data.orders.push(order);
-    localStorage.setItem('plansio_admin_data', JSON.stringify(data));
-  } catch(err) { console.warn('Could not save order:', err); }
-
-  // Show modal
-  const oidEl = document.getElementById('modalOid');
-  const payNote = document.getElementById('modalPayNote');
-  if (oidEl) oidEl.textContent = 'Order ID: ' + orderId;
-  if (payNote) {
-    if (payment === 'UPI') payNote.textContent = '📱 Please complete UPI payment to: Plansio.Jk@okicici';
-    else if (payment === 'Bank Transfer') payNote.textContent = '🏦 Please complete bank transfer and share UTR on WhatsApp: 9358572425';
-    else payNote.textContent = '💵 Pay in cash when your order is delivered.';
+  if(soon.includes(cat)){
+    if(banner) banner.style.display='block';
+    const t = document.getElementById('csb-title');
+    if(t) t.textContent = (names[cat]||cat)+' — Coming Soon!';
+    document.querySelectorAll('.pgcard').forEach(c=>c.style.display='none');
+    if(title) title.textContent = names[cat]||cat;
+    banner?.scrollIntoView({behavior:'smooth',block:'nearest'});
+    return;
   }
+
+  if(banner) banner.style.display='none';
+  if(title) title.textContent = names[cat]||'All Products';
+
+  document.querySelectorAll('.pgcard').forEach(card=>{
+    const cats = card.dataset.cat||'';
+    card.style.display = (cat==='all'||cats.includes(cat)) ? '' : 'none';
+  });
+  document.getElementById('products')?.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// ---- WISHLIST ----
+function toggleWishlist(btn){
+  btn.classList.toggle('wishlisted');
+  const name = btn.closest('.pgcard')?.querySelector('.pgcard-name')?.textContent||'Item';
+  if(btn.classList.contains('wishlisted')){
+    btn.innerHTML='<i class="fa fa-heart"></i>';
+    showToast('❤️ '+name+' added to wishlist!');
+  } else {
+    btn.innerHTML='<i class="far fa-heart"></i>';
+    showToast('💔 Removed from wishlist');
+  }
+}
+
+// ---- SELECT PRODUCT FROM GRID (scrolls to order) ----
+function selectProduct(val){
+  const sel = document.getElementById('o-product');
+  if(sel){
+    for(let opt of sel.options){
+      if(opt.value===val){ sel.value=val; break; }
+    }
+  }
+  calcTotal();
+  setTimeout(()=>{
+    document.getElementById('order')?.scrollIntoView({behavior:'smooth',block:'start'});
+  },100);
+}
+
+// ---- SUBMIT ORDER ----
+function submitOrder(e){
+  e.preventDefault();
+  const name  = document.getElementById('o-name').value.trim();
+  const phone = document.getElementById('o-phone').value.trim();
+  const prod  = document.getElementById('o-product').value;
+  const addr  = document.getElementById('o-address').value.trim();
+
+  if(!name){ showToast('⚠️ Please enter your name'); return; }
+  if(!/^[6-9][0-9]{9}$/.test(phone)){ showToast('⚠️ Enter valid 10-digit phone number'); return; }
+  if(!prod){ showToast('⚠️ Please select a product'); return; }
+  if(addr.length<10){ showToast('⚠️ Enter complete delivery address'); return; }
+
+  const [product, priceStr] = prod.split('|');
+  const qty     = parseInt(document.getElementById('o-qty').value)||1;
+  const amount  = (parseInt(priceStr)||0)*qty;
+  const orderId = 'PL-'+Date.now().toString().slice(-7);
+  const date    = new Date().toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'});
+  const payment = document.getElementById('o-payment').value;
+  const email   = document.getElementById('o-email')?.value.trim()||'';
+  const notes   = document.getElementById('o-notes')?.value.trim()||'';
+
+  try{
+    const saved = localStorage.getItem('plansio_admin_data');
+    const data  = saved ? JSON.parse(saved) : {};
+    if(!data.orders) data.orders=[];
+    data.orders.push({id:orderId,date,name,phone,email,product,qty,amount,payment,address:addr,notes,status:'Pending'});
+    localStorage.setItem('plansio_admin_data', JSON.stringify(data));
+  }catch(err){}
+
+  document.getElementById('omOrderId').textContent = 'Order ID: '+orderId;
   document.getElementById('orderModal').classList.add('open');
   e.target.reset();
   calcTotal();
-  // Reset payment UI
-  switchPayment('COD');
-  document.querySelector('input[name="payment"][value="COD"]').checked = true;
+  showPayInfo('COD');
 }
 
-function closeModal() {
+function closeModal(){
   document.getElementById('orderModal').classList.remove('open');
 }
-
-// Close modal on backdrop click
-document.addEventListener('click', (e) => {
-  const modal = document.getElementById('orderModal');
-  if (modal && e.target === modal) closeModal();
+document.getElementById('orderModal')?.addEventListener('click',function(e){
+  if(e.target===this) closeModal();
 });
 
-// ============================================
-// TOAST NOTIFICATION
-// ============================================
-function showToast(msg, duration = 3000) {
-  const toast = document.getElementById('toast');
-  if (!toast) return;
-  toast.textContent = msg;
-  toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), duration);
+// ---- TOAST ----
+function showToast(msg){
+  const t = document.getElementById('toast');
+  if(!t) return;
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._t);
+  t._t = setTimeout(()=>t.classList.remove('show'),3000);
 }
 
-// ============================================
-// BACK TO TOP BUTTON
-// ============================================
-function initBackToTop() {
-  const btn = document.createElement('button');
-  btn.innerHTML = '<i class="fa fa-chevron-up"></i>';
-  btn.setAttribute('aria-label', 'Back to top');
-  Object.assign(btn.style, {
-    position: 'fixed', bottom: '2rem', right: '2rem',
-    width: '44px', height: '44px', borderRadius: '50%',
-    background: '#2d8a45', color: '#fff', border: 'none',
-    cursor: 'pointer', display: 'none', alignItems: 'center',
-    justifyContent: 'center', fontSize: '1rem',
-    boxShadow: '0 4px 16px rgba(0,0,0,0.2)', zIndex: '999',
-    transition: 'all 0.3s ease'
-  });
-  document.body.appendChild(btn);
-  window.addEventListener('scroll', () => { btn.style.display = window.scrollY > 500 ? 'flex' : 'none'; });
-  btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-  btn.addEventListener('mouseenter', () => { btn.style.background = '#1a5c2a'; btn.style.transform = 'translateY(-3px)'; });
-  btn.addEventListener('mouseleave', () => { btn.style.background = '#2d8a45'; btn.style.transform = 'translateY(0)'; });
+// ---- LOAD ADMIN IMAGES (IndexedDB) ----
+async function loadAdminImages(){
+  if(!window.PlansioMedia) return;
+  try{
+    // Hero slides
+    for(let i=1;i<=3;i++){
+      const img = await window.PlansioMedia.getMedia('slide'+i);
+      if(!img) continue;
+      const slide = document.querySelectorAll('.hero-slide')[i-1];
+      if(slide) slide.innerHTML = `<img src="${img}" class="hero-slide-img" style="width:100%;object-fit:cover;display:block;"/>`;
+    }
+    // Product card images
+    const imgBoxMap = {
+      'vermicompost-main':['img-box-p1','img-box-p2'],
+      'neem-main':['img-box-p3'],
+      'combo-pack':['img-box-p4']
+    };
+    for(const [key,ids] of Object.entries(imgBoxMap)){
+      const img = await window.PlansioMedia.getMedia(key);
+      if(!img) continue;
+      ids.forEach(id=>{
+        const box = document.getElementById(id);
+        if(box) box.innerHTML = `<img src="${img}" style="width:100%;height:100%;object-fit:contain;padding:.5rem"/>`;
+      });
+    }
+    // Logo
+    const logo = await window.PlansioMedia.getMedia('logo');
+    if(logo){
+      document.querySelectorAll('.navbar-logo img, .mob-logo, .footer-logo').forEach(el=>{ el.src=logo; });
+    }
+  }catch(e){ console.warn('loadAdminImages:',e); }
 }
 
-// ============================================
-// LOAD PRODUCT VARIANTS FROM ADMIN DATA
-// ============================================
-function loadVariantsFromAdmin() {
-  try {
+// ---- LOAD ADMIN PRODUCTS ----
+async function loadAdminProducts(){
+  try{
     const saved = localStorage.getItem('plansio_admin_data');
-    if (!saved) return;
+    if(!saved) return;
     const data = JSON.parse(saved);
-    if (!data.variants || !data.variants.length) return;
-
+    if(!data.products || !data.products.length) return;
+    const grid = document.getElementById('productGrid');
+    if(!grid) return;
+    grid.querySelectorAll('.pgcard-admin').forEach(c=>c.remove());
     const sel = document.getElementById('o-product');
-    if (!sel) return;
-    sel.innerHTML = '<option value="">— Select Pack —</option>';
-    data.variants.forEach(v => {
-      if (v.stock !== 'Out of Stock') {
+    if(sel) sel.querySelectorAll('.admin-option').forEach(o=>o.remove());
+    for(const p of data.products){
+      // Add to dropdown
+      if(sel && p.stock!=='Out of Stock'){
         const opt = document.createElement('option');
-        opt.value = `${v.name}|${v.price}`;
-        opt.textContent = `${v.name} — ₹${v.price.toLocaleString('en-IN')}`;
+        opt.value = `${p.name}|${p.price}`;
+        opt.textContent = `${p.name} ${p.weight} — ₹${p.price.toLocaleString('en-IN')}`;
+        opt.className = 'admin-option';
         sel.appendChild(opt);
       }
-    });
-  } catch(e) {}
+      // Get product image from IndexedDB
+      let imgHtml = `<span class="pgcard-emoji">🌿</span>`;
+      try{
+        const prodImg = await window.PlansioMedia.getMedia('product_'+p.id);
+        if(prodImg) imgHtml = `<img src="${prodImg}" style="width:100%;height:100%;object-fit:contain;padding:.5rem"/>`;
+      }catch(e){}
+      const discount = p.mrp>p.price ? Math.round((1-p.price/p.mrp)*100) : 0;
+      const isFree = p.price===0;
+      let catTag = 'all';
+      const nl = (p.name||'').toLowerCase();
+      if(nl.includes('vermi')) catTag='fertiliser all';
+      else if(nl.includes('neem')) catTag='pestcontrol all';
+      else if(nl.includes('combo')) catTag='combo all';
+      const card = document.createElement('div');
+      card.className='pgcard pgcard-admin';
+      card.dataset.cat=catTag;
+      card.innerHTML=`
+        <div class="pgcard-img-wrap">
+          <span class="pgcard-badge bestseller">${p.badge||'NEW'}</span>
+          <div class="pgcard-img-box">${imgHtml}</div>
+          <button class="pgcard-wishlist" onclick="toggleWishlist(this)"><i class="far fa-heart"></i></button>
+        </div>
+        <div class="pgcard-info">
+          <div class="pgcard-rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><span>5.0</span></div>
+          <h3 class="pgcard-name">${p.name}</h3>
+          <p class="pgcard-sub">${p.subtitle||''} ${p.weight?'· '+p.weight:''}</p>
+          <div class="pgcard-price">
+            <span class="pgcard-sp ${isFree?'free-price':''}">${isFree?'FREE':'₹'+p.price.toLocaleString('en-IN')}</span>
+            ${p.mrp>p.price?`<span class="pgcard-mrp"><del>₹${p.mrp.toLocaleString('en-IN')}</del></span>`:''}
+            ${discount>0?`<span class="pgcard-off">${discount}% off</span>`:''}
+          </div>
+          <p class="pgcard-free"><i class="fa fa-gift"></i> + FREE Neem Powder 50g</p>
+          <button class="pgcard-btn" onclick="selectProduct('${p.name}|${p.price}')">View Product</button>
+        </div>`;
+      grid.appendChild(card);
+    }
+  }catch(e){ console.warn('loadAdminProducts:',e); }
 }
 
-// ============================================
-// INIT ON DOM READY
-// ============================================
-document.addEventListener('DOMContentLoaded', () => {
+// ---- LOAD VIDEOS ----
+async function loadAdminVideos(){
+  if(!window.PlansioMedia) return;
+  try{
+    for(let i=1;i<=3;i++){
+      const video = await window.PlansioMedia.getMedia('video'+i);
+      const title = await window.PlansioMedia.getMedia('video'+i+'_title');
+      const card = document.getElementById('vcard-'+i);
+      const inner = document.getElementById('vinner-'+i);
+      const titleEl = document.getElementById('vtitle-'+i);
+      if(video && inner){
+        inner.innerHTML=`<video src="${video}" controls playsinline muted loop style="width:100%;height:100%;object-fit:cover;"></video>
+          <div class="vrc-play-btn"><i class="fa fa-play"></i></div>`;
+      }
+      if(title && titleEl) titleEl.textContent = title;
+    }
+  }catch(e){ console.warn('loadAdminVideos:',e); }
+}
+
+// ---- SCROLL ANIMATIONS ----
+function initAOS(){
+  const els = document.querySelectorAll('[data-aos]');
+  if(!els.length) return;
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach((entry,i)=>{
+      if(entry.isIntersecting){
+        setTimeout(()=>entry.target.classList.add('aos-in'), i*80);
+        obs.unobserve(entry.target);
+      }
+    });
+  },{threshold:0.08,rootMargin:'0px 0px -30px 0px'});
+  els.forEach(el=>obs.observe(el));
+}
+
+// ---- BACK TO TOP ----
+function initBackToTop(){
+  const btn = document.createElement('button');
+  btn.innerHTML='<i class="fa fa-chevron-up"></i>';
+  btn.setAttribute('aria-label','Back to top');
+  Object.assign(btn.style,{
+    position:'fixed',bottom:'2rem',right:'2rem',
+    width:'44px',height:'44px',borderRadius:'50%',
+    background:'#2d8a45',color:'#fff',border:'none',
+    cursor:'pointer',display:'none',alignItems:'center',
+    justifyContent:'center',fontSize:'1rem',
+    boxShadow:'0 4px 16px rgba(0,0,0,.2)',zIndex:'999',
+    transition:'all .3s'
+  });
+  document.body.appendChild(btn);
+  window.addEventListener('scroll',()=>{ btn.style.display=window.scrollY>500?'flex':'none'; });
+  btn.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+  btn.addEventListener('mouseenter',()=>{ btn.style.background='#1a5c2a'; btn.style.transform='translateY(-3px)'; });
+  btn.addEventListener('mouseleave',()=>{ btn.style.background='#2d8a45'; btn.style.transform='translateY(0)'; });
+}
+
+// ---- INIT ----
+document.addEventListener('DOMContentLoaded',()=>{
   initAOS();
   initBackToTop();
-  loadVariantsFromAdmin();
   calcTotal();
-
-  // Set COD panel visible by default
-  switchPayment('COD');
-
-  // Smooth scroll for anchor links
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', (e) => {
-      const target = document.querySelector(a.getAttribute('href'));
-      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-    });
-  });
+  showPayInfo('COD');
+  loadAdminImages();
+  loadAdminProducts();
+  loadAdminVideos();
 });

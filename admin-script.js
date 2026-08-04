@@ -138,6 +138,8 @@ function initAdmin() {
   updateBadges();
   initSidebar();
   initTabs();
+  loadSavedImages();
+  loadSavedVideos();
 }
 
 // ============================================
@@ -173,14 +175,16 @@ function switchTab(name) {
   if (tab) tab.classList.add('active');
   if (nav) nav.classList.add('active');
   const titles = {
-    dashboard:'Dashboard', products:'Products', template:'Product Templates',
-    orders:'Orders', nutrients:'Nutrients / NPK', howto:'How to Use',
-    manufacturer:'Manufacturer', payment:'Payment Settings', password:'Change Password'
+    dashboard:'Dashboard', products:'Products', images:'Images / Photos',
+    videos:'Videos', orders:'Orders', nutrients:'Nutrients / NPK',
+    howto:'How to Use', manufacturer:'Manufacturer',
+    payment:'Payment Settings', password:'Change Password'
   };
   document.getElementById('tbTitle').textContent = titles[name] || name;
   if (name === 'dashboard') updateDashboard();
   if (name === 'orders') renderOrders();
-  if (name === 'template') renderTemplateList();
+  if (name === 'images') loadSavedImages();
+  if (name === 'videos') loadSavedVideos();
 }
 
 // ============================================
@@ -832,3 +836,181 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('loginScreen').style.display = 'flex';
   document.getElementById('adminPanel').style.display  = 'none';
 });
+
+// ============================================
+// IMAGE UPLOAD - IndexedDB (unlimited size)
+// ============================================
+function uploadImage(input, imageName, previewId) {
+  const file = input.files[0];
+  if (!file) return;
+  if (!file.type.startsWith('image/')) {
+    showAdminToast('❌ Valid image file select karo', 'error');
+    return;
+  }
+  showAdminToast('⏳ Uploading...');
+  const reader = new FileReader();
+  reader.onload = async function(e) {
+    const base64 = e.target.result;
+    try {
+      await window.PlansioMedia.saveMedia(imageName, base64);
+      const previewEl = document.getElementById(previewId);
+      if (previewEl) {
+        previewEl.innerHTML = `<img src="${base64}" style="width:100%;height:100%;object-fit:contain;border-radius:8px;"/>`;
+      }
+      showAdminToast(`✅ "${imageName}" uploaded! Refresh website to see live.`, 'success');
+    } catch(err) {
+      showAdminToast('❌ Upload failed: ' + err.message, 'error');
+    }
+  };
+  reader.onerror = () => showAdminToast('❌ File read error.', 'error');
+  reader.readAsDataURL(file);
+}
+
+// ============================================
+// PRODUCT IMAGE UPLOAD (per product)
+// ============================================
+function previewProductImg(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const preview = document.getElementById('pm-img-preview');
+    if (preview) {
+      preview.innerHTML = `<img src="${e.target.result}" style="width:100%;height:100%;object-fit:contain;border-radius:8px;"/>`;
+    }
+    window._currentProductImg = e.target.result;
+    updateTemplatePreview();
+  };
+  reader.readAsDataURL(file);
+}
+
+// Save product image when saving product
+const _origSaveProduct = saveProduct;
+saveProduct = async function() {
+  const id = document.getElementById('pm-id').value || ('p' + Date.now());
+  if (window._currentProductImg) {
+    try {
+      await window.PlansioMedia.saveMedia('product_' + id, window._currentProductImg);
+    } catch(e) {}
+  }
+  _origSaveProduct();
+  window._currentProductImg = null;
+};
+
+const _origOpenAdd = openAddProduct;
+openAddProduct = function() {
+  _origOpenAdd();
+  window._currentProductImg = null;
+  const p = document.getElementById('pm-img-preview');
+  if (p) p.innerHTML = '<div class="no-img-text"><i class="fa fa-image"></i><span>No image selected</span></div>';
+  const f = document.getElementById('pm-img-file');
+  if (f) f.value = '';
+};
+
+const _origOpenEdit = openEditProduct;
+openEditProduct = async function(id) {
+  _origOpenEdit(id);
+  window._currentProductImg = null;
+  const f = document.getElementById('pm-img-file');
+  if (f) f.value = '';
+  try {
+    const img = await window.PlansioMedia.getMedia('product_' + id);
+    const p = document.getElementById('pm-img-preview');
+    if (p) {
+      if (img) {
+        p.innerHTML = `<img src="${img}" style="width:100%;height:100%;object-fit:contain;border-radius:8px;"/>`;
+      } else {
+        p.innerHTML = '<div class="no-img-text"><i class="fa fa-image"></i><span>No image yet</span></div>';
+      }
+    }
+  } catch(e) {}
+};
+
+// ============================================
+// VIDEO UPLOAD - IndexedDB
+// ============================================
+function uploadVideo(input, num) {
+  const file = input.files[0];
+  if (!file) return;
+  showAdminToast('⏳ Uploading video...');
+  const reader = new FileReader();
+  reader.onload = async function(e) {
+    const base64 = e.target.result;
+    try {
+      await window.PlansioMedia.saveMedia('video' + num, base64);
+      const titleInp = document.getElementById('vtitle-inp-' + num);
+      if (titleInp) {
+        await window.PlansioMedia.saveMedia('video' + num + '_title', titleInp.value || 'Video ' + num);
+      }
+      const preview = document.getElementById('vprev-' + num);
+      if (preview) {
+        preview.innerHTML = `<video src="${base64}" controls playsinline style="width:100%;height:100%;object-fit:cover;border-radius:8px;"></video>`;
+      }
+      showAdminToast(`✅ Video ${num} uploaded! Refresh website to see.`, 'success');
+    } catch(err) {
+      showAdminToast('❌ Video upload failed: ' + err.message, 'error');
+    }
+  };
+  reader.onerror = () => showAdminToast('❌ Video file read error.', 'error');
+  reader.readAsDataURL(file);
+}
+
+function saveVideoMeta(num) {
+  const inp = document.getElementById('vtitle-inp-' + num);
+  if (!inp) return;
+  window.PlansioMedia.saveMedia('video' + num + '_title', inp.value).catch(() => {});
+}
+
+// ============================================
+// LOAD SAVED IMAGES INTO ADMIN PREVIEWS
+// ============================================
+async function loadSavedImages() {
+  const previewMap = {
+    'slide1':'prev-slide1','slide2':'prev-slide2','slide3':'prev-slide3',
+    'vermicompost-main':'prev-verm','neem-main':'prev-neem',
+    'results':'prev-results','combo-pack':'prev-combo',
+    'combo-pack2':'prev-combo2','why-plansio':'prev-why',
+    'howto-steps':'prev-howto1','howto-dosage':'prev-howto2','logo':'prev-logo'
+  };
+  for (const [key, prevId] of Object.entries(previewMap)) {
+    try {
+      const val = await window.PlansioMedia.getMedia(key);
+      if (val) {
+        const el = document.getElementById(prevId);
+        if (el) el.innerHTML = `<img src="${val}" style="width:100%;height:100%;object-fit:contain;border-radius:8px;"/>`;
+      }
+    } catch(e) {}
+  }
+  // Product images
+  if (D.products) {
+    for (const p of D.products) {
+      try {
+        const val = await window.PlansioMedia.getMedia('product_' + p.id);
+        if (val) {
+          const el = document.getElementById('prev-prod-' + p.id);
+          if (el) el.innerHTML = `<img src="${val}" style="width:100%;height:100%;object-fit:contain;border-radius:8px;"/>`;
+        }
+      } catch(e) {}
+    }
+  }
+}
+
+// ============================================
+// LOAD SAVED VIDEOS INTO ADMIN PREVIEWS
+// ============================================
+async function loadSavedVideos() {
+  for (let num = 1; num <= 3; num++) {
+    try {
+      const video = await window.PlansioMedia.getMedia('video' + num);
+      const title = await window.PlansioMedia.getMedia('video' + num + '_title');
+      if (video) {
+        const p = document.getElementById('vprev-' + num);
+        if (p) p.innerHTML = `<video src="${video}" controls playsinline style="width:100%;height:100%;object-fit:cover;border-radius:8px;"></video>`;
+      }
+      if (title) {
+        const inp = document.getElementById('vtitle-inp-' + num);
+        if (inp) inp.value = title;
+      }
+    } catch(e) {}
+  }
+}

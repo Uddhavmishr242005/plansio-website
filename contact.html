@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us – PLANSIO Organic Fertilizer</title>
+  <meta name="description" content="Contact PLANSIO team for orders, queries or support. Call 9358572425 or email Plansio.Jk@gmail.com"/>
+  <link rel="stylesheet" href="pages.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar" id="navbar">
+  <div class="nav-wrap">
+    <a href="index.html" class="nav-logo">
+      <img src="images/logo.png" alt="PLANSIO" class="nav-logo-img"/>
+      <div class="logo-text-fallback"><div class="logo-icon-wrap">🌿</div><div><div class="logo-brand">PLANSIO</div><div class="logo-sub">Organic Fertilizer</div></div></div>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#products">Products</a>
+      <a href="about.html">About Us</a>
+      <a href="contact.html" style="color:#1a5c2a;font-weight:800">Contact</a>
+      <a href="index.html#order" class="nav-cta">Order Now <i class="fa fa-arrow-right"></i></a>
+    </nav>
+    <button class="nav-ham" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<div class="mob-overlay" id="mobOverlay" onclick="closeMob()"></div>
+<div class="mob-drawer" id="mobDrawer">
+  <div class="mob-head"><span>🌿 PLANSIO</span><button onclick="closeMob()"><i class="fa fa-times"></i></button></div>
+  <nav class="mob-nav">
+    <a href="index.html" onclick="closeMob()"><i class="fa fa-home"></i> Home</a>
+    <a href="index.html#products" onclick="closeMob()"><i class="fa fa-box"></i> Products</a>
+    <a href="about.html" onclick="closeMob()"><i class="fa fa-building"></i> About Us</a>
+    <a href="contact.html" onclick="closeMob()"><i class="fa fa-envelope"></i> Contact</a>
+    <a href="index.html#order" onclick="closeMob()" class="mob-cta"><i class="fa fa-shopping-cart"></i> Order Now</a>
+  </nav>
+</div>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="page-hero-inner container">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a><span>/</span><span>Contact Us</span>
+    </div>
+    <h1>📞 Contact Us</h1>
+    <p>We're here to help! Reach out for orders, queries, or any support you need.</p>
+  </div>
+  <div class="page-hero-wave">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60Z" fill="#fff"/></svg>
+  </div>
+</section>
+
+<!-- CONTACT CARDS -->
+<section class="page-body">
+  <div class="container">
+
+    <div class="contact-cards-row">
+      <div class="contact-card-item">
+        <div class="cci-icon phone-icon"><i class="fa fa-phone-alt"></i></div>
+        <h3>Call Us</h3>
+        <p>Mon–Sat, 9AM – 7PM</p>
+        <a href="tel:9358572425" class="cci-link">9358572425</a>
+      </div>
+      <div class="contact-card-item">
+        <div class="cci-icon email-icon"><i class="fa fa-envelope"></i></div>
+        <h3>Email Us</h3>
+        <p>We reply within 24 hours</p>
+        <a href="mailto:Plansio.Jk@gmail.com" class="cci-link">Plansio.Jk@gmail.com</a>
+      </div>
+      <div class="contact-card-item">
+        <div class="cci-icon wa-icon"><i class="fab fa-whatsapp"></i></div>
+        <h3>WhatsApp</h3>
+        <p>Quick reply on WhatsApp</p>
+        <a href="https://wa.me/919358572425" target="_blank" class="cci-link">Chat Now</a>
+      </div>
+      <div class="contact-card-item">
+        <div class="cci-icon addr-icon"><i class="fa fa-map-marker-alt"></i></div>
+        <h3>Our Address</h3>
+        <p>Pratapsinghpura Road, Madhosinghpura,<br>Neemrana, Kotputli-Behror, Rajasthan</p>
+        <a href="https://maps.google.com?q=Neemrana,Rajasthan" target="_blank" class="cci-link">View on Map</a>
+      </div>
+    </div>
+
+    <!-- CONTACT FORM + INFO -->
+    <div class="contact-layout">
+
+      <!-- FORM -->
+      <div class="contact-form-card">
+        <div class="cfc-head">
+          <h2>Send Us a Message</h2>
+          <p>Fill in the form and we'll get back to you within 24 hours.</p>
+        </div>
+        <form id="contactForm" onsubmit="submitContact(event)" novalidate>
+          <div class="cf-row">
+            <div class="cf-group">
+              <label>Your Name <span class="req">*</span></label>
+              <input type="text" id="cf-name" placeholder="Enter your full name" required/>
+            </div>
+            <div class="cf-group">
+              <label>Phone Number <span class="req">*</span></label>
+              <input type="tel" id="cf-phone" placeholder="10-digit mobile number" required/>
+            </div>
+          </div>
+          <div class="cf-group">
+            <label>Email Address</label>
+            <input type="email" id="cf-email" placeholder="your@email.com"/>
+          </div>
+          <div class="cf-group">
+            <label>Subject <span class="req">*</span></label>
+            <select id="cf-subject" required>
+              <option value="">-- Select Subject --</option>
+              <option value="Order Inquiry">Order Inquiry</option>
+              <option value="Product Information">Product Information</option>
+              <option value="Delivery Status">Delivery Status</option>
+              <option value="Return / Refund">Return / Refund</option>
+              <option value="Bulk / Wholesale Order">Bulk / Wholesale Order</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="cf-group">
+            <label>Message <span class="req">*</span></label>
+            <textarea id="cf-message" rows="5" placeholder="Write your message here..." required></textarea>
+          </div>
+          <button type="submit" class="btn-primary" style="width:100%;justify-content:center;">
+            <i class="fa fa-paper-plane"></i> Send Message
+          </button>
+        </form>
+      </div>
+
+      <!-- SIDE INFO -->
+      <div class="contact-side">
+        <div class="cs-card">
+          <h3>🕐 Business Hours</h3>
+          <div class="bh-row"><span>Monday – Saturday</span><strong>9:00 AM – 7:00 PM</strong></div>
+          <div class="bh-row"><span>Sunday</span><strong>10:00 AM – 4:00 PM</strong></div>
+          <div class="bh-row"><span>Public Holidays</span><strong>Limited Support</strong></div>
+        </div>
+
+        <div class="cs-card">
+          <h3>📦 For Order Support</h3>
+          <p>If you have placed an order and need help with tracking or delivery, please keep your <strong>Order ID</strong> ready when contacting us.</p>
+          <a href="index.html#order" class="btn-primary" style="margin-top:1rem;justify-content:center;width:100%">
+            <i class="fa fa-shopping-cart"></i> Place New Order
+          </a>
+        </div>
+
+        <div class="cs-card cs-green-card">
+          <h3>🌿 Bulk & Wholesale Inquiries</h3>
+          <p>For bulk orders (50 KG+), special pricing is available for farmers, nurseries and retailers.</p>
+          <a href="https://wa.me/919358572425?text=Hi, I'm interested in bulk order of PLANSIO Vermicompost." target="_blank" class="btn-wa">
+            <i class="fab fa-whatsapp"></i> WhatsApp for Bulk Order
+          </a>
+        </div>
+
+        <div class="cs-card">
+          <h3>📍 Manufacturer Address</h3>
+          <p><strong>J.K. Enterprises</strong><br>
+          Pratapsinghpura Road, Madhosinghpura,<br>
+          Neemrana, Kotputli-Behror,<br>
+          Rajasthan – India</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-wave"><svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60Z" fill="#111"/></svg></div>
+  <div class="footer-body">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="ft-brand">
+          <img src="images/logo.png" alt="PLANSIO" class="footer-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+          <div class="ft-logo" style="display:none">🌿 PLANSIO</div>
+          <p>Premium organic fertilizer for healthy soil and a bountiful harvest.</p>
+          <div class="ft-tagline">"Nurture Your Soil · Nurture Your Future"</div>
+          <div class="ft-socials">
+            <a href="https://wa.me/919358572425" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+          </div>
+        </div>
+        <div class="ft-col">
+          <h4>Products</h4>
+          <a href="index.html#products">Vermicompost 1KG</a>
+          <a href="index.html#products">Vermicompost 5KG</a>
+          <a href="index.html#products">Neem Powder (FREE)</a>
+          <a href="index.html#combo">Combo Pack</a>
+        </div>
+        <div class="ft-col">
+          <h4>Company</h4>
+          <a href="about.html">About Us</a>
+          <a href="contact.html">Contact Us</a>
+          <a href="index.html#order">Order Now</a>
+          <a href="admin.html"><i class="fa fa-lock"></i> Admin</a>
+        </div>
+        <div class="ft-col">
+          <h4>Legal</h4>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms &amp; Conditions</a>
+          <a href="refund.html">Refund Policy</a>
+          <p style="margin-top:.75rem"><i class="fa fa-phone"></i> 9358572425</p>
+          <a href="mailto:Plansio.Jk@gmail.com"><i class="fa fa-envelope"></i> Plansio.Jk@gmail.com</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 PLANSIO · J.K. Enterprises · All Rights Reserved · Made in India 🇮🇳</p>
+        <div class="ft-pay"><span>💵 COD</span><span>📱 UPI</span><span>🏦 Bank</span><span>📲 PhonePe</span></div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+<script>
+function closeMob(){document.getElementById('mobDrawer').classList.remove('open');document.getElementById('mobOverlay').classList.remove('open');}
+document.getElementById('hamburger').addEventListener('click',function(){document.getElementById('mobDrawer').classList.add('open');document.getElementById('mobOverlay').classList.add('open');});
+function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3500);}
+function submitContact(e){
+  e.preventDefault();
+  const name=document.getElementById('cf-name').value.trim();
+  const phone=document.getElementById('cf-phone').value.trim();
+  const subj=document.getElementById('cf-subject').value;
+  const msg=document.getElementById('cf-message').value.trim();
+  if(!name){showToast('⚠️ Please enter your name');return;}
+  if(!phone||!/^[6-9][0-9]{9}$/.test(phone)){showToast('⚠️ Enter valid 10-digit phone number');return;}
+  if(!subj){showToast('⚠️ Please select a subject');return;}
+  if(!msg){showToast('⚠️ Please write your message');return;}
+  e.target.reset();
+  showToast('✅ Message sent! We will contact you within 24 hours.');
+}
+window.addEventListener('scroll',()=>{const n=document.getElementById('navbar');if(n)n.style.boxShadow=window.scrollY>10?'0 4px 20px rgba(0,0,0,0.13)':'0 2px 12px rgba(0,0,0,0.07)';});
+</script>
+</body>
+</html>
+
+
+

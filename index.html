@@ -3,447 +3,354 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PLANSIO – Vermicompost | 100% Organic Fertilizer | Free Neem Powder</title>
-  <meta name="description" content="PLANSIO Vermicompost – Premium organic fertilizer. Free Neem Powder with every order. Pan India delivery. 100% Natural."/>
+  <title>PLANSIO – 100% Organic Vermicompost | Free Neem Powder</title>
   <link rel="stylesheet" href="styles.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 </head>
 <body>
+<script src="db.js"></script>
 
 <!-- ANNOUNCEMENT BAR -->
 <div class="ann-bar">
   <div class="ann-track">
-    <span>🌿 FREE 50g Neem Powder with Every Order!</span>
-    <span>🚚 Pan India Delivery — Fast &amp; Reliable</span>
-    <span>📞 Call Us: 9358572425</span>
-    <span>✅ 100% Organic &amp; Natural — Zero Chemicals</span>
-    <span>🌿 FREE 50g Neem Powder with Every Order!</span>
-    <span>🚚 Pan India Delivery — Fast &amp; Reliable</span>
-    <span>📞 Call Us: 9358572425</span>
-    <span>✅ 100% Organic &amp; Natural — Zero Chemicals</span>
+    <span>🌿 FREE Neem Powder (50g) with Every Order!</span>
+    <span>✅ 100% Organic &amp; Natural</span>
+    <span>🎁 Buy 1 Get 1 Free — Neem Powder with every Vermicompost order</span>
+    <span>⭐ 10,000+ Happy Customers</span>
+    <span>🏆 Lab Tested Quality</span>
+    <span>🌿 FREE Neem Powder (50g) with Every Order!</span>
+    <span>✅ 100% Organic &amp; Natural</span>
+    <span>🎁 Buy 1 Get 1 Free — Neem Powder with every Vermicompost order</span>
+    <span>⭐ 10,000+ Happy Customers</span>
+    <span>🏆 Lab Tested Quality</span>
   </div>
 </div>
 
 <!-- NAVBAR -->
 <header class="navbar" id="navbar">
-  <div class="nav-wrap">
-    <a href="#top" class="nav-logo">
-      <div class="logo-icon-wrap">🌿</div>
-      <div>
-        <div class="logo-brand">PLANSIO</div>
-        <div class="logo-sub">Organic Fertilizer</div>
-      </div>
+  <div class="navbar-inner">
+    <a href="#" class="navbar-logo">
+      <img src="images/logo.png" alt="PLANSIO"/>
     </a>
-    <nav class="nav-links" id="navLinks">
-      <a href="#hero">Home</a>
+    <navg class="navbar-links">
       <a href="#products">Products</a>
-      <a href="#why">Why Us</a>
-      <a href="#howto">How to Use</a>
+      <a href="howto.html">How to Use</a>
       <a href="#combo">Combo Pack</a>
-      <a href="#order" class="nav-cta">Order Now <i class="fa fa-arrow-right"></i></a>
-      <a href="admin.html" class="nav-admin" title="Admin"><i class="fa fa-lock"></i></a>
+      <a href="about.html">About Us</a>
+      <a href="contact.html">Contact</a>
+      <a href="#order" class="navbar-cta">Order Now <i class="fa fa-arrow-right"></i></a>
     </nav>
-    <button class="nav-ham" id="hamburger" aria-label="Open menu">
-      <span></span><span></span><span></span>
-    </button>
+    <button class="navbar-ham" id="navHam"><span></span><span></span><span></span></button>
   </div>
 </header>
 
-<!-- MOBILE DRAWER -->
-<div class="mob-overlay" id="mobOverlay" onclick="closeMob()"></div>
-<div class="mob-drawer" id="mobDrawer">
-  <div class="mob-head">
-    <span>🌿 PLANSIO</span>
+<!-- MOBILE MENU -->
+<div class="mob-bg" id="mobBg" onclick="closeMob()"></div>
+<div class="mob-menu" id="mobMenu">
+  <div class="mob-top">
+    <img src="images/logo.png" alt="PLANSIO" class="mob-logo"/>
     <button onclick="closeMob()"><i class="fa fa-times"></i></button>
   </div>
-  <nav class="mob-nav">
-    <a href="#hero" onclick="closeMob()"><i class="fa fa-home"></i> Home</a>
+  <nav>
     <a href="#products" onclick="closeMob()"><i class="fa fa-box"></i> Products</a>
-    <a href="#why" onclick="closeMob()"><i class="fa fa-leaf"></i> Why PLANSIO</a>
-    <a href="#howto" onclick="closeMob()"><i class="fa fa-list-ol"></i> How to Use</a>
+    <a href="howto.html" onclick="closeMob()"><i class="fa fa-list-ol"></i> How to Use</a>
     <a href="#combo" onclick="closeMob()"><i class="fa fa-gift"></i> Combo Pack</a>
-    <a href="#order" onclick="closeMob()" class="mob-cta"><i class="fa fa-shopping-cart"></i> Order Now</a>
+    <a href="about.html" onclick="closeMob()"><i class="fa fa-building"></i> About Us</a>
+    <a href="contact.html" onclick="closeMob()"><i class="fa fa-envelope"></i> Contact</a>
+    <a href="#order" onclick="closeMob()" class="mob-cta-btn"><i class="fa fa-shopping-cart"></i> Order Now</a>
   </nav>
-  <div class="mob-footer">
+  <div class="mob-contact">
     <a href="tel:9358572425"><i class="fa fa-phone"></i> 9358572425</a>
-    <a href="mailto:Plansio.Jk@gmail.com"><i class="fa fa-envelope"></i> Plansio.Jk@gmail.com</a>
+    <a href="https://wa.me/919358572425"><i class="fab fa-whatsapp"></i> WhatsApp</a>
   </div>
 </div>
 
-<!-- ===== HERO ===== -->
-<section class="hero" id="hero">
-  <div class="hero-inner container">
-    <div class="hero-left" data-aos>
-      <div class="hero-pill">🌿 India's Premium Organic Fertilizer</div>
-      <h1><span class="h1-main">PLANSIO</span><span class="h1-sub">VERMICOMPOST</span></h1>
-      <p class="hero-desc">Premium Deep-Nutrient Fertilizer — made from natural sources to improve soil structure, retain moisture and <strong>boost plant growth naturally.</strong></p>
-      <div class="hero-checks">
-        <span><i class="fa fa-check-circle"></i> Stronger Roots</span>
-        <span><i class="fa fa-check-circle"></i> Faster Growth</span>
-        <span><i class="fa fa-check-circle"></i> Better Fruits &amp; Flowers</span>
-        <span><i class="fa fa-check-circle"></i> Fertile Soil</span>
-      </div>
-      <div class="hero-free-bar">
-        <i class="fa fa-gift"></i>
-        <div><strong>FREE Neem Powder (50g) with Every Order</strong><span>Worth ₹99 — automatically included</span></div>
-      </div>
-      <div class="hero-btns">
-        <a href="#order" class="btn-primary">Order Now <i class="fa fa-arrow-right"></i></a>
-        <a href="#products" class="btn-outline">Explore Products</a>
-      </div>
-      <div class="hero-trust-row">
-        <div><i class="fa fa-truck"></i> Pan India Delivery</div>
-        <div><i class="fa fa-money-bill-wave"></i> COD Available</div>
-        <div><i class="fa fa-certificate"></i> 100% Organic</div>
-      </div>
-    </div>
-
-    <div class="hero-right" data-aos>
-      <!-- CSS Packet Visual -->
-      <div class="packet-wrap">
-        <div class="pkt pkt-verm">
-          <div class="pkt-leaves">🌿</div>
-          <div class="pkt-brand-name">PLANSIO</div>
-          <div class="pkt-product-name">VERMICOMPOST</div>
-          <div class="pkt-subtitle">PREMIUM DEEP-NUTRIENT FERTILIZER</div>
-          <div class="pkt-wave-strip">
-            <svg viewBox="0 0 300 60" preserveAspectRatio="none"><path d="M0,30 C75,0 150,60 225,30 C262,15 281,45 300,30 L300,60 L0,60Z" fill="#1a5c2a"/></svg>
-          </div>
-          <div class="pkt-organic">100% ORGANIC &amp; NATURAL</div>
-          <div class="pkt-icon">🌱</div>
-          <div class="pkt-features">
-            <span><i class="fa fa-check"></i> STRONGER ROOTS</span>
-            <span><i class="fa fa-check"></i> FASTER GROWTH</span>
-            <span><i class="fa fa-check"></i> BETTER FRUITS/FLOWERS</span>
-            <span><i class="fa fa-check"></i> FERTILE SOIL</span>
-          </div>
-          <div class="pkt-footer-strip">
-            <span>NURTURE YOUR SOIL</span>
-            <span>NET WEIGHT: 1 KG</span>
-          </div>
-        </div>
-        <div class="pkt pkt-neem">
-          <div class="pkt-neem-brand">PLANSIO</div>
-          <div class="pkt-neem-name">NEEM POWDER</div>
-          <div class="pkt-neem-icon">🌿</div>
-          <div class="pkt-neem-features">
-            <span>✓ Pure Neem Power</span>
-            <span>✓ Plants · Skin · Hair</span>
-            <span>✓ Natural &amp; Safe</span>
-          </div>
-          <div class="pkt-neem-wt">NET WT: 50g</div>
-          <div class="pkt-free-seal">FREE!</div>
-        </div>
-        <div class="pkt-badge-float organic-float"><i class="fa fa-leaf"></i><span>100% Organic</span></div>
-        <div class="pkt-badge-float delivery-float"><i class="fa fa-truck"></i><span>Free Delivery</span></div>
-      </div>
-    </div>
+<!-- HERO SLIDER -->
+<section class="hero-banner" id="hero">
+  <div class="hero-slider" id="heroSlider">
+    <div class="hero-slide"><div class="slide-no-img"><div class="slide-no-img-text"><p>Hero Banner 1</p><small>Upload from Admin → Images → Slide 1</small><a href="admin.html" class="btn-green" style="margin-top:1rem;font-size:.85rem">Upload Image</a></div></div></div>
+    <div class="hero-slide"><div class="slide-no-img"><div class="slide-no-img-text"><p>Hero Banner 2</p><small>Upload from Admin → Images → Slide 2</small><a href="admin.html" class="btn-green" style="margin-top:1rem;font-size:.85rem">Upload Image</a></div></div></div>
+    <div class="hero-slide"><div class="slide-no-img"><div class="slide-no-img-text"><p>Hero Banner 3</p><small>Upload from Admin → Images → Slide 3</small><a href="admin.html" class="btn-green" style="margin-top:1rem;font-size:.85rem">Upload Image</a></div></div></div>
   </div>
-  <div class="hero-wave"><svg viewBox="0 0 1440 70" preserveAspectRatio="none"><path d="M0,35 C360,70 1080,0 1440,35 L1440,70 L0,70Z" fill="#fff"/></svg></div>
+  <button class="hslider-prev" id="hPrev"><i class="fa fa-chevron-left"></i></button>
+  <button class="hslider-next" id="hNext"><i class="fa fa-chevron-right"></i></button>
+  <div class="hslider-dots" id="hDots">
+    <span class="hdot active"></span><span class="hdot"></span><span class="hdot"></span>
+  </div>
 </section>
 
-<!-- STATS BAR -->
-<section class="stats-bar">
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+  <div class="trust-strip-inner">
+    <div class="ts-item ts-highlight"><i class="fa fa-gift"></i><span>BUY 1 GET 1 FREE — Neem Powder with Every Order!</span></div>
+    <div class="ts-div"></div>
+    <div class="ts-item"><i class="fa fa-certificate"></i><span>100% Organic Certified</span></div>
+    <div class="ts-div"></div>
+    <div class="ts-item"><i class="fa fa-leaf"></i><span>Zero Chemicals</span></div>
+    <div class="ts-div"></div>
+    <div class="ts-item"><i class="fa fa-star"></i><span>10,000+ Happy Customers</span></div>
+    <div class="ts-div"></div>
+    <div class="ts-item"><i class="fa fa-flask"></i><span>Lab Tested Quality</span></div>
+  </div>
+</div>
+
+<!-- CATEGORY ROW -->
+<section class="cat-row-sec">
   <div class="container">
-    <div class="stats-inner">
-      <div class="stat"><strong>10,000+</strong><span>Happy Customers</span></div>
-      <div class="stat-div"></div>
-      <div class="stat"><strong>100%</strong><span>Organic &amp; Natural</span></div>
-      <div class="stat-div"></div>
-      <div class="stat"><strong>Pan India</strong><span>Delivery</span></div>
-      <div class="stat-div"></div>
-      <div class="stat"><strong>FREE</strong><span>Neem Powder Included</span></div>
-      <div class="stat-div"></div>
-      <div class="stat"><strong>Since 2020</strong><span>Trusted Brand</span></div>
+    <div class="cat-row" id="catRow">
+      <a href="#" class="cat-item active-cat" onclick="filterCat(event,'all')">
+        <div class="cat-ico-wrap"><span style="font-size:1.8rem">🌿</span></div>
+        <span>All</span>
+      </a>
+      <a href="#" class="cat-item active-cat" onclick="filterCat(event,'fertiliser')">
+        <div class="cat-ico-wrap"><span style="font-size:1.8rem">🌾</span></div>
+        <span>Fertilisers</span>
+      </a>
+      <a href="#" class="cat-item active-cat" onclick="filterCat(event,'pestcontrol')">
+        <div class="cat-ico-wrap"><span style="font-size:1.8rem">🛡️</span></div>
+        <span>Pest Control</span>
+        <div class="cat-badge">Free</div>
+      </a>
+      <a href="#" class="cat-item active-cat" onclick="filterCat(event,'combo')">
+        <div class="cat-ico-wrap"><span style="font-size:1.8rem">🎁</span></div>
+        <span>Combo Pack</span>
+        <div class="cat-badge sale">Sale</div>
+      </a>
+      <a href="#" class="cat-item coming-soon" onclick="filterCat(event,'plants')">
+        <div class="cat-ico-wrap"><span style="font-size:1.8rem">🌱</span></div>
+        <span>Plants</span>
+        <div class="cat-soon">Soon</div>
+      </a>
+      <a href="#" class="cat-item coming-soon" onclick="filterCat(event,'soils')">
+        <div class="cat-ico-wrap"><span style="font-size:1.8rem">🟤</span></div>
+        <span>Soils</span>
+        <div class="cat-soon">Soon</div>
+      </a>
+      <a href="#" class="cat-item coming-soon" onclick="filterCat(event,'seeds')">
+        <div class="cat-ico-wrap"><span style="font-size:1.8rem">🌰</span></div>
+        <span>Seeds</span>
+        <div class="cat-soon">Soon</div>
+      </a>
+      <a href="#" class="cat-item coming-soon" onclick="filterCat(event,'tools')">
+        <div class="cat-ico-wrap"><span style="font-size:1.8rem">🪛</span></div>
+        <span>Garden Tools</span>
+        <div class="cat-soon">Soon</div>
+      </a>
+      <a href="#" class="cat-item coming-soon" onclick="filterCat(event,'watering')">
+        <div class="cat-ico-wrap"><span style="font-size:1.8rem">💧</span></div>
+        <span>Watering</span>
+        <div class="cat-soon">Soon</div>
+      </a>
+      <a href="#" class="cat-item coming-soon" onclick="filterCat(event,'pots')">
+        <div class="cat-ico-wrap"><span style="font-size:1.8rem">🪴</span></div>
+        <span>Pots</span>
+        <div class="cat-soon">Soon</div>
+      </a>
     </div>
   </div>
 </section>
 
-<!-- ===== PRODUCTS ===== -->
-<section class="section" id="products">
+<!-- COMING SOON BANNER (shown when clicking soon categories) -->
+<div class="coming-soon-banner" id="comingSoonBanner" style="display:none">
   <div class="container">
-    <div class="sec-head">
-      <div class="sec-pill">Our Products</div>
-      <h2>Premium Organic Solutions</h2>
-      <p>Carefully formulated for every plant, crop and garden</p>
-    </div>
-
-    <!-- Vermicompost -->
-    <div class="prod-row" data-aos>
-      <div class="prod-visual verm-vis">
-        <div class="pv-glow"></div>
-        <div class="pv-card">
-          <div class="pvc-top">
-            <span class="pvc-brand">PLANSIO</span>
-            <span class="pvc-leaf">🌿</span>
-          </div>
-          <div class="pvc-name">VERMICOMPOST</div>
-          <div class="pvc-badge">100% ORGANIC &amp; NATURAL</div>
-          <div class="pvc-emoji">🌱</div>
-          <div class="pvc-list">
-            <span>✓ Stronger Roots</span>
-            <span>✓ Faster Growth</span>
-            <span>✓ Better Fruits &amp; Flowers</span>
-            <span>✓ Fertile Soil</span>
-          </div>
-          <div class="pvc-foot">NURTURE YOUR SOIL · 1 KG</div>
-        </div>
-        <div class="pv-orbits">
-          <div class="orb o1"><i class="fa fa-seedling"></i><span>Soil Health</span></div>
-          <div class="orb o2"><i class="fa fa-tint"></i><span>Moisture</span></div>
-          <div class="orb o3"><i class="fa fa-recycle"></i><span>Eco Safe</span></div>
-          <div class="orb o4"><i class="fa fa-shield-alt"></i><span>All Plants</span></div>
-        </div>
+    <div class="csb-inner">
+      <span class="csb-ico">🚀</span>
+      <div>
+        <h3 id="csb-title">Coming Soon!</h3>
+        <p>We're working on this category. Stay tuned!</p>
       </div>
-      <div class="prod-info" data-aos>
-        <div class="pi-pill">🏆 Best Seller</div>
-        <h2>PLANSIO Vermicompost</h2>
-        <p class="pi-subtitle">PREMIUM DEEP-NUTRIENT FERTILIZER</p>
-        <p class="pi-desc">Made from natural organic sources, PLANSIO Vermicompost improves soil structure, retains moisture and provides balanced nutrition to all plants — vegetables, fruits, flowers, lawns and all crops.</p>
-        <div class="pi-feats">
-          <div class="pi-feat"><div class="pf-ico"><i class="fa fa-seedling"></i></div><div><strong>Improves Soil Health</strong><p>Enhances microbial activity naturally</p></div></div>
-          <div class="pi-feat"><div class="pf-ico"><i class="fa fa-tint"></i></div><div><strong>Retains Moisture</strong><p>Reduces watering frequency</p></div></div>
-          <div class="pi-feat"><div class="pf-ico"><i class="fa fa-recycle"></i></div><div><strong>Eco-Friendly</strong><p>Zero chemicals, 100% safe</p></div></div>
-          <div class="pi-feat"><div class="pf-ico"><i class="fa fa-shield-alt"></i></div><div><strong>Safe for All Plants</strong><p>Vegetables, flowers, field crops</p></div></div>
-        </div>
-        <div class="npk-row">
-          <div class="npk-item n-chip"><span class="ns">N</span><span class="nv">1.5–2.0%</span><span class="nl">Nitrogen</span></div>
-          <div class="npk-item p-chip"><span class="ns">P</span><span class="nv">1.0–1.5%</span><span class="nl">Phosphorus</span></div>
-          <div class="npk-item k-chip"><span class="ns">K</span><span class="nv">1.0–1.5%</span><span class="nl">Potassium</span></div>
-        </div>
-        <div class="pi-pricing">
-          <div class="pi-price">₹299 <del>₹499</del> <span class="pi-save">Save 40%</span></div>
-          <div class="pi-free"><i class="fa fa-gift"></i> + FREE Neem Powder 50g (worth ₹99)</div>
-        </div>
-        <div class="pi-actions">
-          <a href="#order" class="btn-primary">Order Now <i class="fa fa-arrow-right"></i></a>
-          <a href="#combo" class="btn-outline">View Combo</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Neem Powder -->
-    <div class="prod-row prod-row-rev" data-aos>
-      <div class="prod-visual neem-vis">
-        <div class="pv-glow neem-glow"></div>
-        <div class="pv-card pv-neem-card">
-          <div class="pvc-top"><span class="pvc-brand">PLANSIO</span></div>
-          <div class="pvc-name neem-nm">NEEM POWDER</div>
-          <div class="pvc-neem-circle">🌿</div>
-          <div class="pvc-list neem-list">
-            <span>✓ Pure Neem Power</span>
-            <span>✓ For Plants · Skin · Hair</span>
-            <span>✓ Natural · Safe · Chemical-Free</span>
-          </div>
-          <div class="pvc-badge neem-badge">PREMIUM QUALITY</div>
-          <div class="pvc-foot">NET WEIGHT: 50 gms</div>
-        </div>
-        <div class="neem-free-stamp"><div class="nfs">FREE!</div></div>
-        <div class="neem-icons">
-          <div class="ni"><span>🌱</span><small>100% Organic</small></div>
-          <div class="ni"><span>💧</span><small>Rich Nutrients</small></div>
-          <div class="ni"><span>🌾</span><small>Boosts Yield</small></div>
-          <div class="ni"><span>🛡️</span><small>Pest Control</small></div>
-        </div>
-      </div>
-      <div class="prod-info" data-aos>
-        <div class="pi-pill neem-pill">🍃 FREE with Every Order</div>
-        <h2>PLANSIO Neem Powder</h2>
-        <p class="pi-subtitle">NATURAL PEST CONTROL · PREMIUM QUALITY · 50g</p>
-        <p class="pi-desc">Pure neem powder packed with natural nutrients and pest-repelling properties. Protects plants from fungal diseases and pests while enriching soil. Also great for skin and hair care.</p>
-        <div class="neem-uses">
-          <div class="nu-item"><div class="nu-ico">🌿</div><strong>For Plants</strong><p>Natural pest &amp; disease control</p></div>
-          <div class="nu-item"><div class="nu-ico">✨</div><strong>For Skin</strong><p>Natural skin care remedy</p></div>
-          <div class="nu-item"><div class="nu-ico">💆</div><strong>For Hair</strong><p>Nourishes scalp &amp; hair</p></div>
-        </div>
-        <div class="neem-free-banner">
-          <i class="fa fa-gift"></i>
-          <div><strong>NEEM POWDER IS FREE WITH EVERY ORDER</strong><span>No extra charge — automatically included</span></div>
-        </div>
-      </div>
+      <a href="#order" class="btn-green" style="font-size:.85rem">Get Notified</a>
     </div>
   </div>
-</section>
+</div>
 
-<!-- ===== WHY PLANSIO ===== -->
-<section class="why-sec" id="why">
+<!-- PRODUCTS GRID -->
+<section class="sec products-sec" id="products">
   <div class="container">
-    <div class="sec-head white-head">
-      <div class="sec-pill light-pill">Why Choose Us</div>
-      <h2>Why Choose PLANSIO?</h2>
-      <p>Trusted by farmers and gardeners across India</p>
+    <div class="pgrid-head">
+      <div class="pgrid-head-left">
+        <p class="sec-label">Our Products</p>
+        <h2 id="pgrid-title">All Products</h2>
+      </div>
     </div>
-    <div class="why-layout">
-      <div class="why-list" data-aos>
-        <div class="why-item">
-          <div class="wi-num">01</div>
-          <div class="wi-ico"><i class="fa fa-seedling"></i></div>
-          <div><h3>Enhances Nutrient Uptake</h3><p>Provides essential macro &amp; micro nutrients for optimal plant health</p></div>
+    <div class="pgrid" id="productGrid">
+
+      <!-- Vermicompost 1KG -->
+      <div class="pgcard" data-cat="fertiliser all" data-aos>
+        <div class="pgcard-img-wrap">
+          <span class="pgcard-badge bestseller">BESTSELLER</span>
+          <div class="pgcard-img-box" id="img-box-p1">
+            <span class="pgcard-emoji">🌾</span>
+          </div>
+          <button class="pgcard-wishlist" onclick="toggleWishlist(this)"><i class="far fa-heart"></i></button>
         </div>
-        <div class="why-item">
-          <div class="wi-num">02</div>
-          <div class="wi-ico"><i class="fa fa-leaf"></i></div>
-          <div><h3>Promotes Healthy Growth</h3><p>Accelerates germination, root development and overall plant growth</p></div>
-        </div>
-        <div class="why-item">
-          <div class="wi-num">03</div>
-          <div class="wi-ico"><i class="fa fa-wind"></i></div>
-          <div><h3>Improves Soil Aeration</h3><p>Loosens compacted soil allowing roots to breathe and expand freely</p></div>
-        </div>
-        <div class="why-item">
-          <div class="wi-num">04</div>
-          <div class="wi-ico"><i class="fa fa-microscope"></i></div>
-          <div><h3>Stimulates Microbial Activity</h3><p>Boosts beneficial soil organisms that improve fertility naturally</p></div>
-        </div>
-        <div class="why-item">
-          <div class="wi-num">05</div>
-          <div class="wi-ico"><i class="fa fa-chart-line"></i></div>
-          <div><h3>Increases Yield &amp; Quality</h3><p>Bigger fruits, more flowers, better harvests season after season</p></div>
-        </div>
-      </div>
-      <div class="why-card" data-aos>
-        <div class="wc-logo">🌿 PLANSIO</div>
-        <div class="wc-headline">USE PLANSIO, SEE THE DIFFERENCE</div>
-        <div class="wc-sub">— HEALTHY SOIL. HEALTHY PLANTS. HAPPY YOU. —</div>
-        <div class="wc-results">
-          <div class="wcr"><div class="wcr-ico">🌱</div><strong>ENRICHES SOIL</strong><span>Naturally</span></div>
-          <div class="wcr"><div class="wcr-ico">📈</div><strong>BOOSTS GROWTH &amp; YIELD</strong></div>
-          <div class="wcr"><div class="wcr-ico">🌸</div><strong>BETTER FLOWERS &amp; FRUITS</strong></div>
-          <div class="wcr"><div class="wcr-ico">😊</div><strong>HAPPIER YOU, GREENER TOMORROW</strong></div>
-        </div>
-        <div class="wc-cta">CHOOSE NATURAL. CHOOSE PLANSIO. 🌿</div>
-        <div class="wc-sub2">FOR A SUSTAINABLE FUTURE</div>
-        <div class="why-badges">
-          <span><i class="fa fa-certificate"></i> 100% ORGANIC</span>
-          <span><i class="fa fa-recycle"></i> ECO FRIENDLY</span>
-          <span><i class="fa fa-leaf"></i> SAFE &amp; NATURAL</span>
+        <div class="pgcard-info">
+          <div class="pgcard-rating">
+            <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+            <span>4.8</span><span class="pgcard-reviews">(124)</span>
+          </div>
+          <h3 class="pgcard-name">PLANSIO Vermicompost</h3>
+          <p class="pgcard-sub">Premium Deep-Nutrient Fertilizer</p>
+          <div class="pgcard-price">
+            <span class="pgcard-sp">₹299</span>
+            <span class="pgcard-mrp"><del>₹499</del></span>
+            <span class="pgcard-off">40% off</span>
+          </div>
+          <p class="pgcard-free"><i class="fa fa-gift"></i> + FREE Neem Powder 50g</p>
+          <button class="pgcard-btn" onclick="selectProduct('PLANSIO Vermicompost 1KG|299')">View Product</button>
         </div>
       </div>
+
+      <!-- Vermicompost 5KG -->
+      <div class="pgcard" data-cat="fertiliser all" data-aos>
+        <div class="pgcard-img-wrap">
+          <span class="pgcard-badge value">VALUE PACK</span>
+          <div class="pgcard-img-box" id="img-box-p2">
+            <span class="pgcard-emoji">🌾</span>
+          </div>
+          <button class="pgcard-wishlist" onclick="toggleWishlist(this)"><i class="far fa-heart"></i></button>
+        </div>
+        <div class="pgcard-info">
+          <div class="pgcard-rating">
+            <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+            <span>4.9</span><span class="pgcard-reviews">(87)</span>
+          </div>
+          <h3 class="pgcard-name">PLANSIO Vermicompost</h3>
+          <p class="pgcard-sub">Economy Pack — 5 KG</p>
+          <div class="pgcard-price">
+            <span class="pgcard-sp">₹999</span>
+            <span class="pgcard-mrp"><del>₹1,499</del></span>
+            <span class="pgcard-off">33% off</span>
+          </div>
+          <p class="pgcard-free"><i class="fa fa-gift"></i> + FREE Neem Powder 50g</p>
+          <button class="pgcard-btn" onclick="selectProduct('PLANSIO Vermicompost 5KG|999')">View Product</button>
+        </div>
+      </div>
+
+      <!-- Neem Powder -->
+      <div class="pgcard" data-cat="pestcontrol all" data-aos>
+        <div class="pgcard-img-wrap">
+          <span class="pgcard-badge free-badge">FREE GIFT</span>
+          <div class="pgcard-img-box" id="img-box-p3">
+            <span class="pgcard-emoji">🌿</span>
+          </div>
+          <button class="pgcard-wishlist" onclick="toggleWishlist(this)"><i class="far fa-heart"></i></button>
+        </div>
+        <div class="pgcard-info">
+          <div class="pgcard-rating">
+            <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-alt"></i>
+            <span>4.7</span><span class="pgcard-reviews">(56)</span>
+          </div>
+          <h3 class="pgcard-name">PLANSIO Neem Powder</h3>
+          <p class="pgcard-sub">Natural Pest Control — 50g</p>
+          <div class="pgcard-price">
+            <span class="pgcard-sp free-price">FREE</span>
+            <span class="pgcard-mrp"><del>₹99</del></span>
+          </div>
+          <p class="pgcard-free"><i class="fa fa-check-circle"></i> With every Vermicompost order</p>
+          <button class="pgcard-btn" onclick="selectProduct('PLANSIO Vermicompost 1KG|299')">Get Free Now</button>
+        </div>
+      </div>
+
+      <!-- Combo Pack -->
+      <div class="pgcard pgcard-featured" data-cat="combo all" data-aos>
+        <div class="pgcard-img-wrap">
+          <span class="pgcard-badge combo-badge">BEST COMBO</span>
+          <div class="pgcard-img-box" id="img-box-p4">
+            <span class="pgcard-emoji">🎁</span>
+          </div>
+          <button class="pgcard-wishlist" onclick="toggleWishlist(this)"><i class="far fa-heart"></i></button>
+        </div>
+        <div class="pgcard-info">
+          <div class="pgcard-rating">
+            <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+            <span>4.9</span><span class="pgcard-reviews">(203)</span>
+          </div>
+          <h3 class="pgcard-name">PLANSIO Combo Pack</h3>
+          <p class="pgcard-sub">2× Vermicompost + 2× Neem Powder FREE</p>
+          <div class="pgcard-price">
+            <span class="pgcard-sp">₹549</span>
+            <span class="pgcard-mrp"><del>₹796</del></span>
+            <span class="pgcard-off">31% off</span>
+          </div>
+          <p class="pgcard-free"><i class="fa fa-gift"></i> Save ₹247 on this combo!</p>
+          <button class="pgcard-btn pgcard-btn-featured" onclick="selectProduct('PLANSIO Combo Pack (2VC+2NP)|549')">View Product</button>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
-<!-- ===== HOW TO USE ===== -->
-<section class="section howto-sec" id="howto">
+<!-- VIDEO SECTION - Instagram Reels Style (products ke beech mein) -->
+<section class="video-sec" id="videos">
   <div class="container">
     <div class="sec-head">
-      <div class="sec-pill">Usage Guide</div>
-      <h2>How to Use PLANSIO</h2>
-      <p>4 simple steps for the best results</p>
+      <p class="sec-label">🎥 Watch & Learn</p>
+      <h2>PLANSIO in Action</h2>
+      <p>See real results from our customers</p>
     </div>
-    <div class="howto-row" data-aos>
-      <div class="ht-step">
-        <div class="hts-num">1</div>
-        <div class="hts-ico">🪴</div>
-        <h3>Fill Pot with Soil</h3>
-        <p>Prepare your pot or garden bed. Loosen the topsoil 2–3 inches deep for best absorption.</p>
-      </div>
-      <div class="ht-arrow"><i class="fa fa-chevron-right"></i></div>
-      <div class="ht-step">
-        <div class="hts-num">2</div>
-        <div class="hts-ico">🌱</div>
-        <h3>Add PLANSIO Vermicompost</h3>
-        <p>Sprinkle 50–100g evenly around the plant roots. Avoid direct contact with stem or leaves.</p>
-      </div>
-      <div class="ht-arrow"><i class="fa fa-chevron-right"></i></div>
-      <div class="ht-step">
-        <div class="hts-num">3</div>
-        <div class="hts-ico">🪛</div>
-        <h3>Mix with Soil</h3>
-        <p>Gently mix into the topsoil using a garden trowel for even distribution and better nutrient release.</p>
-      </div>
-      <div class="ht-arrow"><i class="fa fa-chevron-right"></i></div>
-      <div class="ht-step">
-        <div class="hts-num">4</div>
-        <div class="hts-ico">💧</div>
-        <h3>Water &amp; Watch Growth</h3>
-        <p>Water thoroughly after application. Repeat every 30–45 days during the growing season.</p>
-      </div>
-    </div>
-    <div class="howto-note" data-aos>
-      <i class="fa fa-info-circle"></i>
-      <p>Best applied in early morning or evening. Store in a cool, dry place away from direct sunlight. Safe for all plants — vegetables, fruits, flowers and field crops.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ===== COMBO PACK ===== -->
-<section class="section combo-sec" id="combo">
-  <div class="container">
-    <div class="sec-head">
-      <div class="sec-pill">🎉 Special Offer</div>
-      <h2>PLANSIO Combo Pack</h2>
-      <p>Perfect combo for <strong>Healthy Plants!</strong></p>
-      <div class="combo-strip-badge">2 VERMICOMPOST + 2 NEEM POWDER</div>
-    </div>
-    <div class="combo-card" data-aos>
-      <div class="combo-visual">
-        <div class="combo-top-tag">BEST COMBO — BETTER GROWTH!</div>
-        <div class="combo-pkts">
-          <div class="cpkt cpkt-v"><div class="cpkt-brand">PLANSIO</div><div class="cpkt-name">VERMICOMPOST</div><div class="cpkt-badge">100% ORGANIC</div><div class="cpkt-ico">🌱</div></div>
-          <div class="cpkt cpkt-v"><div class="cpkt-brand">PLANSIO</div><div class="cpkt-name">VERMICOMPOST</div><div class="cpkt-badge">100% ORGANIC</div><div class="cpkt-ico">🌱</div></div>
-          <div class="cpkt cpkt-n"><div class="cpkt-brand">PLANSIO</div><div class="cpkt-name">NEEM POWDER</div><div class="cpkt-badge">PREMIUM</div><div class="cpkt-ico">🌿</div><div class="cpkt-free">FREE</div></div>
-          <div class="cpkt cpkt-n"><div class="cpkt-brand">PLANSIO</div><div class="cpkt-name">NEEM POWDER</div><div class="cpkt-badge">PREMIUM</div><div class="cpkt-ico">🌿</div><div class="cpkt-free">FREE</div></div>
+    <div class="video-reel-row" id="videoReelRow">
+      <!-- Video 1 -->
+      <div class="video-reel-card" id="vcard-1">
+        <div class="vrc-inner" id="vinner-1">
+          <div class="vrc-placeholder">
+            <div class="vrc-ph-ico">🎬</div>
+            <p>Video 1</p>
+            <small>Upload from Admin → Videos</small>
+          </div>
         </div>
-        <div class="combo-feat-row">
-          <span><i class="fa fa-seedling"></i> Boosts Growth</span>
-          <span><i class="fa fa-flask"></i> Rich Nutrients</span>
-          <span><i class="fa fa-recycle"></i> Eco Friendly</span>
-          <span><i class="fa fa-shield-alt"></i> Safe &amp; Effective</span>
+        <div class="vrc-info">
+          <p class="vrc-title" id="vtitle-1">PLANSIO Vermicompost Results</p>
+          <span class="vrc-tag">🌱 Organic Farming</span>
         </div>
       </div>
-      <div class="combo-info">
-        <h3>What's in the Combo?</h3>
-        <div class="combo-items">
-          <div class="ci"><div class="ci-qty">2×</div><div><strong>PLANSIO Vermicompost</strong><span>1 KG each — Premium Deep-Nutrient Fertilizer</span></div></div>
-          <div class="ci"><div class="ci-qty free-ci">2×</div><div><strong>PLANSIO Neem Powder <span class="free-chip">FREE</span></strong><span>50g each — Natural Pest Control</span></div></div>
+      <!-- Video 2 -->
+      <div class="video-reel-card" id="vcard-2">
+        <div class="vrc-inner" id="vinner-2">
+          <div class="vrc-placeholder">
+            <div class="vrc-ph-ico">🎬</div>
+            <p>Video 2</p>
+            <small>Upload from Admin → Videos</small>
+          </div>
         </div>
-        <div class="combo-savings">
-          <div class="cs-row"><span>2× Vermicompost 1KG</span><span>₹598</span></div>
-          <div class="cs-row"><span>2× Neem Powder 50g</span><span><del>₹198</del> FREE</span></div>
-          <div class="cs-row cs-total"><span>Your Savings</span><span class="cs-save">₹247</span></div>
+        <div class="vrc-info">
+          <p class="vrc-title" id="vtitle-2">How to Use PLANSIO</p>
+          <span class="vrc-tag">📋 Tutorial</span>
         </div>
-        <div class="combo-price-box">
-          <span class="cpb-label">Combo Price</span>
-          <span class="cpb-price">₹549</span>
-          <span class="cpb-mrp"><del>₹796</del></span>
-          <span class="cpb-save">Save 31%</span>
+      </div>
+      <!-- Video 3 -->
+      <div class="video-reel-card" id="vcard-3">
+        <div class="vrc-inner" id="vinner-3">
+          <div class="vrc-placeholder">
+            <div class="vrc-ph-ico">🎬</div>
+            <p>Video 3</p>
+            <small>Upload from Admin → Videos</small>
+          </div>
         </div>
-        <p class="combo-tagline">"Nourish Your Plants The Natural Way" 🌿</p>
-        <a href="#order" class="btn-primary w-full"><i class="fa fa-cart-plus"></i> Order Combo Now</a>
-        <p class="combo-pure">🌿 Pure Goodness for Your Green Friends</p>
+        <div class="vrc-info">
+          <p class="vrc-title" id="vtitle-3">Customer Reviews</p>
+          <span class="vrc-tag">⭐ Reviews</span>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== ORDER + PAYMENT ===== -->
-<section class="section order-sec" id="order">
+<!-- ORDER SECTION -->
+<section class="sec order-sec" id="order">
   <div class="container">
-    <div class="sec-head">
-      <div class="sec-pill">🛒 Place Your Order</div>
-      <h2>Order PLANSIO Today</h2>
-      <p>Fast delivery · Cash on Delivery · UPI · Bank Transfer</p>
-    </div>
     <div class="order-layout">
-
-      <!-- FORM -->
-      <div class="order-form-card" data-aos>
-        <div class="ofc-head"><h3><i class="fa fa-shopping-cart"></i> Fill Your Order Details</h3></div>
+      <div class="order-form-card">
+        <div class="ofc-header"><h3><i class="fa fa-shopping-cart"></i> Fill Order Details</h3></div>
         <form id="orderForm" onsubmit="submitOrder(event)" novalidate>
           <div class="fg-row">
-            <div class="fg">
-              <label>Full Name <span class="req">*</span></label>
-              <input type="text" id="o-name" placeholder="Your full name" required/>
-            </div>
-            <div class="fg">
-              <label>Phone Number <span class="req">*</span></label>
-              <input type="tel" id="o-phone" placeholder="10-digit mobile number" required/>
-            </div>
+            <div class="fg"><label>Full Name *</label><input type="text" id="o-name" placeholder="Your full name" required/></div>
+            <div class="fg"><label>Phone Number *</label><input type="tel" id="o-phone" placeholder="10-digit mobile number" required/></div>
           </div>
           <div class="fg-row">
             <div class="fg">
-              <label>Select Product <span class="req">*</span></label>
+              <label>Select Product *</label>
               <select id="o-product" required onchange="calcTotal()">
                 <option value="">— Select Pack —</option>
                 <option value="PLANSIO Vermicompost 1KG|299">Vermicompost 1KG — ₹299</option>
@@ -452,7 +359,7 @@
               </select>
             </div>
             <div class="fg">
-              <label>Quantity <span class="req">*</span></label>
+              <label>Quantity *</label>
               <div class="qty-ctrl">
                 <button type="button" onclick="changeQty(-1)">−</button>
                 <input type="number" id="o-qty" value="1" min="1" max="50" readonly/>
@@ -460,228 +367,125 @@
               </div>
             </div>
           </div>
-          <div class="fg">
-            <label>Delivery Address <span class="req">*</span></label>
-            <textarea id="o-address" rows="3" placeholder="House No, Street, Village/City, District, State, PIN Code" required></textarea>
-          </div>
-          <div class="fg">
-            <label>Email Address <span class="opt">(Optional)</span></label>
-            <input type="email" id="o-email" placeholder="your@email.com"/>
-          </div>
-
-          <!-- PAYMENT METHOD -->
-          <div class="fg">
-            <label>Payment Method <span class="req">*</span></label>
-            <div class="pay-methods">
-              <label class="pm-opt selected" id="pml-cod">
-                <input type="radio" name="payment" value="COD" checked onchange="switchPayment('COD')"/>
-                <div class="pm-card">
-                  <span class="pm-ico">💵</span>
-                  <div><strong>Cash on Delivery</strong><span>Pay when you receive</span></div>
-                  <i class="fa fa-check-circle pm-tick"></i>
-                </div>
-              </label>
-              <label class="pm-opt" id="pml-upi">
-                <input type="radio" name="payment" value="UPI" onchange="switchPayment('UPI')"/>
-                <div class="pm-card">
-                  <span class="pm-ico">📱</span>
-                  <div><strong>UPI / PhonePe / GPay</strong><span>Instant online payment</span></div>
-                  <i class="fa fa-check-circle pm-tick"></i>
-                </div>
-              </label>
-              <label class="pm-opt" id="pml-bank">
-                <input type="radio" name="payment" value="Bank Transfer" onchange="switchPayment('Bank')"/>
-                <div class="pm-card">
-                  <span class="pm-ico">🏦</span>
-                  <div><strong>Bank Transfer / NEFT</strong><span>Direct bank payment</span></div>
-                  <i class="fa fa-check-circle pm-tick"></i>
-                </div>
-              </label>
+          <div class="fg"><label>Delivery Address *</label><textarea id="o-address" rows="3" placeholder="House No, Street, City, District, State, PIN Code" required></textarea></div>
+          <div class="fg-row">
+            <div class="fg"><label>Email (Optional)</label><input type="email" id="o-email" placeholder="your@email.com"/></div>
+            <div class="fg"><label>Payment Method</label>
+              <select id="o-payment" onchange="showPayInfo(this.value)">
+                <option value="COD">Cash on Delivery</option>
+                <option value="UPI">UPI / PhonePe / GPay</option>
+                <option value="Bank">Bank Transfer</option>
+              </select>
             </div>
           </div>
-
-          <!-- COD INFO -->
-          <div class="pay-info-panel" id="pi-COD">
-            <i class="fa fa-info-circle"></i>
-            <p>Pay in <strong>cash</strong> when your order is delivered at your doorstep. No advance payment needed.</p>
-          </div>
-
-          <!-- UPI INFO -->
-          <div class="pay-info-panel hidden" id="pi-UPI">
-            <div class="upi-wrap">
-              <div class="upi-qr-box">
-                <div class="css-qr">
-                  <div class="qr-corner qr-tl"></div>
-                  <div class="qr-corner qr-tr"></div>
-                  <div class="qr-corner qr-bl"></div>
-                  <div class="qr-center-logo">🌿</div>
-                  <div class="qr-dots"></div>
-                </div>
-                <p class="qr-label">Scan to Pay</p>
-              </div>
-              <div class="upi-details">
-                <p class="upi-title"><i class="fa fa-mobile-alt"></i> UPI Payment Details</p>
-                <div class="upi-id-row">
-                  <span>UPI ID:</span>
-                  <strong>Plansio.Jk@okicici</strong>
-                  <button type="button" class="copy-btn" onclick="copyText('Plansio.Jk@okicici','UPI ID')"><i class="fa fa-copy"></i> Copy</button>
-                </div>
-                <p class="upi-apps">Pay via: <strong>PhonePe · GPay · Paytm · BHIM · Any UPI</strong></p>
-                <div class="upi-alert"><i class="fa fa-exclamation-triangle"></i> After payment, enter your UTR/Transaction ID in the notes field below.</div>
-              </div>
+          <div class="pay-info active" id="pay-COD"><i class="fa fa-info-circle"></i> Pay cash when order arrives. No advance needed.</div>
+          <div class="pay-info" id="pay-UPI"><i class="fa fa-mobile-alt"></i> UPI ID: <strong>Plansio.Jk@okicici</strong> <button type="button" onclick="copyUPI()">Copy</button></div>
+          <div class="pay-info" id="pay-Bank"><i class="fa fa-university"></i> Bank details shared after confirmation. Share UTR: <a href="https://wa.me/919358572425">WhatsApp</a></div>
+          <div class="fg"><label>Notes / UTR (Optional)</label><textarea id="o-notes" rows="2" placeholder="Transaction ID or delivery instructions..."></textarea></div>
+          <div class="order-total">
+            <div class="ot-left">
+              <span>Product: <strong id="otAmt">₹0</strong></span>
+              <span>Delivery: <strong class="green">FREE 🚚</strong></span>
+              <span>Neem Powder: <strong class="green">FREE 🎁</strong></span>
             </div>
+            <div class="ot-right">Total: <strong id="otTotal">₹0</strong></div>
           </div>
-
-          <!-- BANK INFO -->
-          <div class="pay-info-panel hidden" id="pi-Bank">
-            <p class="bank-title"><i class="fa fa-university"></i> Bank Transfer Details</p>
-            <div class="bank-table">
-              <div class="bt-row"><span>Account Name</span><strong>J.K. Enterprises</strong></div>
-              <div class="bt-row"><span>Account Number</span><strong>Contact us for details</strong></div>
-              <div class="bt-row"><span>Bank / IFSC</span><strong>Contact us for details</strong></div>
-            </div>
-            <div class="bank-alert"><i class="fa fa-whatsapp" style="color:#25d366"></i> After transfer, share your UTR on WhatsApp: <a href="https://wa.me/919358572425" target="_blank">9358572425</a></div>
-          </div>
-
-          <div class="fg">
-            <label>Notes / Transaction ID <span class="opt">(Optional)</span></label>
-            <textarea id="o-notes" rows="2" placeholder="UTR number for UPI/Bank payments, or delivery instructions..."></textarea>
-          </div>
-
-          <!-- ORDER TOTAL -->
-          <div class="order-total-box">
-            <div class="otb-row"><span>Product Total</span><span id="otProductAmt">₹0</span></div>
-            <div class="otb-row"><span>Delivery Charges</span><span class="free-tag">FREE 🚚</span></div>
-            <div class="otb-row"><span>Free Neem Powder</span><span class="free-tag">Included ✅</span></div>
-            <div class="otb-divider"></div>
-            <div class="otb-row otb-grand"><span>Grand Total</span><span id="otGrandTotal">₹0</span></div>
-          </div>
-
-          <button type="submit" class="btn-submit">
-            <i class="fa fa-shopping-cart"></i> Place Order
-          </button>
-          <p class="form-note"><i class="fa fa-lock"></i> Your information is safe. We will call you to confirm.</p>
+          <button type="submit" class="btn-order"><i class="fa fa-shopping-cart"></i> Place Order</button>
+          <p class="secure-note"><i class="fa fa-lock"></i> Your info is safe. We'll call to confirm.</p>
         </form>
       </div>
-
-      <!-- SIDE -->
-      <div class="order-side" data-aos>
-        <div class="side-card gift-card">
-          <div class="sc-ico">🎁</div>
-          <h4>FREE Gift with Every Order</h4>
-          <p>PLANSIO <strong>Neem Powder 50g</strong> (worth ₹99) is automatically included — no coupon needed!</p>
+      <div class="order-side">
+        <div class="os-card os-gift">
+          <div class="osg-ico">🎁</div>
+          <h4>FREE with Every Order</h4>
+          <p>PLANSIO <strong>Neem Powder 50g</strong> (worth ₹99) — auto included!</p>
         </div>
-        <div class="side-card">
-          <h4><i class="fa fa-check-circle" style="color:#2d8a45"></i> Why Order from Us?</h4>
-          <ul class="why-order">
+        <div class="os-card">
+          <h4>Why Order from Us?</h4>
+          <ul>
             <li><i class="fa fa-truck"></i> Pan India fast delivery</li>
-            <li><i class="fa fa-money-bill-wave"></i> Cash on Delivery available</li>
-            <li><i class="fa fa-certificate"></i> 100% Organic — lab tested</li>
-            <li><i class="fa fa-gift"></i> Free Neem Powder included</li>
-            <li><i class="fa fa-headset"></i> Dedicated customer support</li>
+            <li><i class="fa fa-money-bill-wave"></i> Cash on Delivery</li>
+            <li><i class="fa fa-certificate"></i> 100% Organic, lab tested</li>
+            <li><i class="fa fa-gift"></i> Free Neem Powder every order</li>
+            <li><i class="fa fa-headset"></i> Dedicated support</li>
           </ul>
         </div>
-        <div class="side-card contact-card">
-          <h4><i class="fa fa-headset"></i> Need Help?</h4>
-          <a href="tel:9358572425" class="clink phone"><i class="fa fa-phone"></i> 9358572425</a>
-          <a href="mailto:Plansio.Jk@gmail.com" class="clink email"><i class="fa fa-envelope"></i> Plansio.Jk@gmail.com</a>
-          <a href="https://wa.me/919358572425" target="_blank" class="clink whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp Us</a>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ===== MANUFACTURER ===== -->
-<section class="section mfg-sec" id="about">
-  <div class="container">
-    <div class="mfg-wrap" data-aos>
-      <div class="mfg-info">
-        <div class="sec-pill">Manufacturer</div>
-        <h2>J.K. Enterprises</h2>
-        <p>Trusted manufacturer of premium organic fertilizers committed to sustainable agriculture. Based in Rajasthan, bringing high-quality bio-organic solutions to farmers and gardeners across India.</p>
-        <div class="mfg-details">
-          <div class="md-row"><i class="fa fa-building"></i><div><strong>Firm Name</strong><span>J.K. Enterprises</span></div></div>
-          <div class="md-row"><i class="fa fa-trademark"></i><div><strong>Brand</strong><span>PLANSIO™</span></div></div>
-          <div class="md-row"><i class="fa fa-map-marker-alt"></i><div><strong>Address</strong><span>Pratapsinghpura Road, Madhosinghpura, Neemrana, Kotputli-Behror, Rajasthan</span></div></div>
-          <div class="md-row"><i class="fa fa-phone"></i><div><strong>Contact</strong><span><a href="tel:9358572425">9358572425</a></span></div></div>
-          <div class="md-row"><i class="fa fa-envelope"></i><div><strong>Email</strong><span><a href="mailto:Plansio.Jk@gmail.com">Plansio.Jk@gmail.com</a></span></div></div>
-        </div>
-      </div>
-      <div class="mfg-brand-card">
-        <div class="mbc-logo">🌿</div>
-        <div class="mbc-brand">PLANSIO™</div>
-        <div class="mbc-tagline">Healthy Soil, Healthy Harvest</div>
-        <div class="mbc-certs">
-          <span>✅ Organic Certified</span>
-          <span>✅ Lab Tested</span>
-          <span>✅ Made in India 🇮🇳</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== FOOTER ===== -->
-<footer class="footer">
-  <div class="footer-wave"><svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60Z" fill="#111"/></svg></div>
-  <div class="footer-body">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="ft-brand">
-          <div class="ft-logo">🌿 PLANSIO</div>
-          <p>Premium organic fertilizer for healthy soil and a bountiful harvest. Trusted by farmers and gardeners across India.</p>
-          <div class="ft-tagline">"Nurture Your Soil · Nurture Your Future"</div>
-          <div class="ft-socials">
-            <a href="https://wa.me/919358572425" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-            <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
-          </div>
-        </div>
-        <div class="ft-col">
-          <h4>Products</h4>
-          <a href="#products">Vermicompost 1KG</a>
-          <a href="#products">Vermicompost 5KG</a>
-          <a href="#products">Neem Powder (FREE)</a>
-          <a href="#combo">Combo Pack</a>
-        </div>
-        <div class="ft-col">
-          <h4>Quick Links</h4>
-          <a href="#why">Why PLANSIO</a>
-          <a href="#howto">How to Use</a>
-          <a href="#order">Order Now</a>
-          <a href="#about">About Us</a>
-          <a href="admin.html"><i class="fa fa-lock"></i> Admin</a>
-        </div>
-        <div class="ft-col">
-          <h4>Contact Us</h4>
-          <p>J.K. Enterprises</p>
-          <p>Pratapsinghpura Road, Madhosinghpura,</p>
-          <p>Neemrana, Kotputli-Behror, Rajasthan</p>
+        <div class="os-card os-contact">
+          <h4>Need Help?</h4>
           <a href="tel:9358572425"><i class="fa fa-phone"></i> 9358572425</a>
           <a href="mailto:Plansio.Jk@gmail.com"><i class="fa fa-envelope"></i> Plansio.Jk@gmail.com</a>
+          <a href="https://wa.me/919358572425" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp Us</a>
         </div>
       </div>
-      <div class="footer-bottom">
-        <p>© 2024 PLANSIO · J.K. Enterprises · All Rights Reserved · Made in India 🇮🇳</p>
-        <div class="ft-pay"><span>💵 COD</span><span>📱 UPI</span><span>🏦 Bank</span><span>📲 PhonePe</span><span>📲 GPay</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-brand-col">
+          <img src="images/logo.png" alt="PLANSIO" class="footer-logo"/>
+          <p>Premium organic fertilizer for healthy soil and bountiful harvest. Trusted by farmers and gardeners across India.</p>
+          <p class="footer-tagline">"Nurture Your Soil · Nurture Your Future"</p>
+          <div class="footer-socials">
+            <a href="https://wa.me/919358572425"><i class="fab fa-whatsapp"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Products</h4>
+          <a href="#products"><i class="fa fa-leaf"></i> Vermicompost 1KG</a>
+          <a href="#products"><i class="fa fa-leaf"></i> Vermicompost 5KG</a>
+          <a href="#products"><i class="fa fa-leaf"></i> Neem Powder (FREE)</a>
+          <a href="#products"><i class="fa fa-gift"></i> Combo Pack</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="about.html"><i class="fa fa-building"></i> About Us</a>
+          <a href="contact.html"><i class="fa fa-envelope"></i> Contact Us</a>
+          <a href="howto.html"><i class="fa fa-list-ol"></i> How to Use</a>
+          <a href="#order"><i class="fa fa-shopping-cart"></i> Order Now</a>
+          <a href="admin.html"><i class="fa fa-lock"></i> Admin</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="privacy.html"><i class="fa fa-shield-alt"></i> Privacy Policy</a>
+          <a href="terms.html"><i class="fa fa-file-alt"></i> Terms &amp; Conditions</a>
+          <a href="refund.html"><i class="fa fa-undo"></i> Refund Policy</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <p><i class="fa fa-building"></i> J.K. Enterprises</p>
+          <p><i class="fa fa-map-marker-alt"></i> Neemrana, Rajasthan</p>
+          <a href="tel:9358572425"><i class="fa fa-phone"></i> 9358572425</a>
+          <a href="mailto:Plansio.Jk@gmail.com"><i class="fa fa-envelope"></i> Plansio.Jk@gmail.com</a>
+          <a href="https://wa.me/919358572425"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        </div>
       </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">
+      <p>© 2024 PLANSIO · J.K. Enterprises · All Rights Reserved · Made in India 🇮🇳</p>
+      <div class="footer-pay"><span>💵 COD</span><span>📱 UPI</span><span>🏦 Bank</span><span>📲 PhonePe</span></div>
     </div>
   </div>
 </footer>
 
-<!-- ORDER SUCCESS MODAL -->
-<div class="modal-back" id="orderModal">
+<!-- ORDER MODAL -->
+<div class="modal-bg" id="orderModal">
   <div class="modal-box">
-    <div class="modal-ico"><i class="fa fa-check-circle"></i></div>
-    <h2>Order Placed Successfully!</h2>
-    <p>Thank you! Our team will call you within <strong>24 hours</strong> to confirm your order.</p>
-    <div class="modal-oid" id="modalOid"></div>
-    <div class="modal-free"><i class="fa fa-gift"></i> Your <strong>FREE Neem Powder 50g</strong> is included!</div>
-    <div class="modal-pay-note" id="modalPayNote"></div>
-    <button class="btn-primary w-full" onclick="closeModal()" style="margin-top:1.5rem;justify-content:center;"><i class="fa fa-check"></i> Done</button>
+    <div class="modal-ico">✅</div>
+    <h2>Order Placed!</h2>
+    <p>Thank you! Our team will call you within 24 hours to confirm.</p>
+    <div class="modal-oid" id="omOrderId"></div>
+    <p class="modal-free">🎁 Your <strong>FREE Neem Powder 50g</strong> is included!</p>
+    <button class="btn-green" onclick="closeModal()" style="width:100%;justify-content:center;margin-top:1.5rem">Done <i class="fa fa-check"></i></button>
   </div>
 </div>
 

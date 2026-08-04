@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 </head>
 <body>
+<script src="db.js"></script>
 
 <!-- ===== LOGIN ===== -->
 <div class="login-screen" id="loginScreen">
@@ -38,7 +39,10 @@
   <!-- SIDEBAR -->
   <aside class="sidebar" id="sidebar">
     <div class="sb-header">
-      <div class="sb-logo">🌿 PLANSIO</div>
+      <div class="sb-logo">
+      <img src="images/logo.png" alt="PLANSIO" class="sb-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'"/>
+      <span style="display:none">🌿 PLANSIO</span>
+    </div>
       <button class="sb-close" id="sbClose"><i class="fa fa-times"></i></button>
     </div>
     <nav class="sb-nav">
@@ -49,8 +53,11 @@
         <i class="fa fa-box-open"></i><span>Products</span>
         <span class="sbn-badge" id="badgeProducts">0</span>
       </a>
-      <a href="#" class="sbn" data-tab="template">
-        <i class="fa fa-eye"></i><span>Product Templates</span>
+      <a href="#" class="sbn" data-tab="images">
+        <i class="fa fa-image"></i><span>Images / Photos</span>
+      </a>
+      <a href="#" class="sbn" data-tab="videos">
+        <i class="fa fa-video"></i><span>Videos</span>
       </a>
       <a href="#" class="sbn" data-tab="orders">
         <i class="fa fa-shopping-cart"></i><span>Orders</span>
@@ -140,24 +147,175 @@
       </div>
     </div>
 
-    <!-- ======= PRODUCT TEMPLATES ======= -->
-    <div class="tab" id="tab-template">
+    <!-- ======= IMAGES ======= -->
+    <div class="tab" id="tab-images">
       <div class="page-head">
-        <h1>🎨 Product Templates</h1>
-        <p>See exactly how each product looks on the website. Select a product to preview its template.</p>
+        <h1>🖼️ Images / Photos</h1>
+        <p>Upload images for hero slides, products, combo — changes reflect live on website</p>
       </div>
-      <div class="template-layout">
-        <div class="template-selector card">
-          <h3>Select Product to Preview</h3>
-          <div id="templateProductList"></div>
-        </div>
-        <div class="template-preview-area" id="templatePreviewArea">
-          <div class="tpa-placeholder">
-            <i class="fa fa-eye"></i>
-            <p>Select a product from the left to see its website template preview</p>
+
+      <!-- HERO SLIDES -->
+      <div class="card">
+        <div class="form-section-label">Hero Banner Slides (Home Page)</div>
+        <div class="img-upload-grid">
+          <div class="img-upload-item">
+            <div class="img-preview" id="prev-slide1">
+              <img src="images/slide1.jpg" alt="Slide 1" onerror="this.src=''; this.parentElement.innerHTML='<div class=\'no-img\'>No Image</div>'"/>
+            </div>
+            <p class="iui-label">Slide 1 (Hero Banner)</p>
+            <label class="btn-upload"><i class="fa fa-upload"></i> Upload Image<input type="file" accept="image/*" onchange="uploadImage(this,'slide1','prev-slide1')"/></label>
+          </div>
+          <div class="img-upload-item">
+            <div class="img-preview" id="prev-slide2">
+              <img src="images/slide2.jpg" alt="Slide 2" onerror="this.src=''; this.parentElement.innerHTML='<div class=\'no-img\'>No Image</div>'"/>
+            </div>
+            <p class="iui-label">Slide 2 (Hero Banner)</p>
+            <label class="btn-upload"><i class="fa fa-upload"></i> Upload Image<input type="file" accept="image/*" onchange="uploadImage(this,'slide2','prev-slide2')"/></label>
+          </div>
+          <div class="img-upload-item">
+            <div class="img-preview" id="prev-slide3">
+              <img src="images/slide3.jpg" alt="Slide 3" onerror="this.src=''; this.parentElement.innerHTML='<div class=\'no-img\'>No Image</div>'"/>
+            </div>
+            <p class="iui-label">Slide 3 (Hero Banner)</p>
+            <label class="btn-upload"><i class="fa fa-upload"></i> Upload Image<input type="file" accept="image/*" onchange="uploadImage(this,'slide3','prev-slide3')"/></label>
           </div>
         </div>
       </div>
+
+      <!-- PRODUCT IMAGES -->
+      <div class="card">
+        <div class="form-section-label">Product Images</div>
+        <div class="img-upload-grid">
+          <div class="img-upload-item">
+            <div class="img-preview" id="prev-verm">
+              <img src="images/vermicompost-main.jpg" alt="Vermicompost" onerror="this.src=''; this.parentElement.innerHTML='<div class=\'no-img\'>No Image</div>'"/>
+            </div>
+            <p class="iui-label">Vermicompost Product</p>
+            <label class="btn-upload"><i class="fa fa-upload"></i> Upload Image<input type="file" accept="image/*" onchange="uploadImage(this,'vermicompost-main','prev-verm')"/></label>
+          </div>
+          <div class="img-upload-item">
+            <div class="img-preview" id="prev-neem">
+              <img src="images/neem-main.jpg" alt="Neem Powder" onerror="this.src=''; this.parentElement.innerHTML='<div class=\'no-img\'>No Image</div>'"/>
+            </div>
+            <p class="iui-label">Neem Powder Product</p>
+            <label class="btn-upload"><i class="fa fa-upload"></i> Upload Image<input type="file" accept="image/*" onchange="uploadImage(this,'neem-main','prev-neem')"/></label>
+          </div>
+          <div class="img-upload-item">
+            <div class="img-preview" id="prev-results">
+              <img src="images/results.jpg" alt="Results" onerror="this.src=''; this.parentElement.innerHTML='<div class=\'no-img\'>No Image</div>'"/>
+            </div>
+            <p class="iui-label">Results Banner</p>
+            <label class="btn-upload"><i class="fa fa-upload"></i> Upload Image<input type="file" accept="image/*" onchange="uploadImage(this,'results','prev-results')"/></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- COMBO & OTHER -->
+      <div class="card">
+        <div class="form-section-label">Combo Pack &amp; Other Images</div>
+        <div class="img-upload-grid">
+          <div class="img-upload-item">
+            <div class="img-preview" id="prev-combo">
+              <img src="images/combo-pack.jpg" alt="Combo Pack" onerror="this.src=''; this.parentElement.innerHTML='<div class=\'no-img\'>No Image</div>'"/>
+            </div>
+            <p class="iui-label">Combo Pack Main</p>
+            <label class="btn-upload"><i class="fa fa-upload"></i> Upload Image<input type="file" accept="image/*" onchange="uploadImage(this,'combo-pack','prev-combo')"/></label>
+          </div>
+          <div class="img-upload-item">
+            <div class="img-preview" id="prev-combo2">
+              <img src="images/combo-pack2.jpg" alt="Combo Pack 2" onerror="this.src=''; this.parentElement.innerHTML='<div class=\'no-img\'>No Image</div>'"/>
+            </div>
+            <p class="iui-label">Combo Pack Side</p>
+            <label class="btn-upload"><i class="fa fa-upload"></i> Upload Image<input type="file" accept="image/*" onchange="uploadImage(this,'combo-pack2','prev-combo2')"/></label>
+          </div>
+          <div class="img-upload-item">
+            <div class="img-preview" id="prev-why">
+              <img src="images/why-plansio.jpg" alt="Why PLANSIO" onerror="this.src=''; this.parentElement.innerHTML='<div class=\'no-img\'>No Image</div>'"/>
+            </div>
+            <p class="iui-label">Why PLANSIO Banner</p>
+            <label class="btn-upload"><i class="fa fa-upload"></i> Upload Image<input type="file" accept="image/*" onchange="uploadImage(this,'why-plansio','prev-why')"/></label>
+          </div>
+          <div class="img-upload-item">
+            <div class="img-preview" id="prev-howto1">
+              <img src="images/howto-steps.jpg" alt="How to Use" onerror="this.src=''; this.parentElement.innerHTML='<div class=\'no-img\'>No Image</div>'"/>
+            </div>
+            <p class="iui-label">How to Use Steps</p>
+            <label class="btn-upload"><i class="fa fa-upload"></i> Upload Image<input type="file" accept="image/*" onchange="uploadImage(this,'howto-steps','prev-howto1')"/></label>
+          </div>
+          <div class="img-upload-item">
+            <div class="img-preview" id="prev-howto2">
+              <img src="images/howto-dosage.jpg" alt="Dosage" onerror="this.src=''; this.parentElement.innerHTML='<div class=\'no-img\'>No Image</div>'"/>
+            </div>
+            <p class="iui-label">Dosage Guide</p>
+            <label class="btn-upload"><i class="fa fa-upload"></i> Upload Image<input type="file" accept="image/*" onchange="uploadImage(this,'howto-dosage','prev-howto2')"/></label>
+          </div>
+          <div class="img-upload-item">
+            <div class="img-preview" id="prev-logo">
+              <img src="images/logo.png" alt="Logo" onerror="this.src=''; this.parentElement.innerHTML='<div class=\'no-img\'>No Image</div>'"/>
+            </div>
+            <p class="iui-label">Website Logo</p>
+            <label class="btn-upload"><i class="fa fa-upload"></i> Upload Logo<input type="file" accept="image/*" onchange="uploadImage(this,'logo','prev-logo')"/></label>
+          </div>
+        </div>
+        <div class="upload-note">
+          <i class="fa fa-info-circle"></i>
+          <p>Images are stored in browser (localStorage). Recommended: <strong>Hero slides: 1440×520px | Products: any clear photo | No fixed size restriction</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======= VIDEOS ======= -->
+    <div class="tab" id="tab-videos">
+      <div class="page-head">
+        <h1>🎥 Videos</h1>
+        <p>Upload Instagram-style vertical reels shown between products on homepage</p>
+      </div>
+      <div class="card">
+        <div class="form-section-label">Video Reels (shown on Home Page between products)</div>
+        <div class="video-upload-grid">
+          <div class="video-upload-item">
+            <div class="video-preview" id="vprev-1"><div class="no-img-text"><i class="fa fa-video"></i><span>No Video</span></div></div>
+            <div class="fg" style="margin-top:.65rem">
+              <label>Video 1 Title</label>
+              <input type="text" id="vtitle-inp-1" placeholder="e.g. PLANSIO Results" oninput="saveVideoMeta(1)"/>
+            </div>
+            <label class="btn-upload" style="margin-top:.5rem;width:100%;justify-content:center">
+              <i class="fa fa-upload"></i> Upload Video 1
+              <input type="file" accept="video/mp4,video/*" onchange="uploadVideo(this,1)"/>
+            </label>
+            <p class="img-hint">MP4, vertical 9:16 (Instagram Reel style)</p>
+          </div>
+          <div class="video-upload-item">
+            <div class="video-preview" id="vprev-2"><div class="no-img-text"><i class="fa fa-video"></i><span>No Video</span></div></div>
+            <div class="fg" style="margin-top:.65rem">
+              <label>Video 2 Title</label>
+              <input type="text" id="vtitle-inp-2" placeholder="e.g. How to Use PLANSIO" oninput="saveVideoMeta(2)"/>
+            </div>
+            <label class="btn-upload" style="margin-top:.5rem;width:100%;justify-content:center">
+              <i class="fa fa-upload"></i> Upload Video 2
+              <input type="file" accept="video/mp4,video/*" onchange="uploadVideo(this,2)"/>
+            </label>
+            <p class="img-hint">MP4, vertical 9:16 (Instagram Reel style)</p>
+          </div>
+          <div class="video-upload-item">
+            <div class="video-preview" id="vprev-3"><div class="no-img-text"><i class="fa fa-video"></i><span>No Video</span></div></div>
+            <div class="fg" style="margin-top:.65rem">
+              <label>Video 3 Title</label>
+              <input type="text" id="vtitle-inp-3" placeholder="e.g. Customer Reviews" oninput="saveVideoMeta(3)"/>
+            </div>
+            <label class="btn-upload" style="margin-top:.5rem;width:100%;justify-content:center">
+              <i class="fa fa-upload"></i> Upload Video 3
+              <input type="file" accept="video/mp4,video/*" onchange="uploadVideo(this,3)"/>
+            </label>
+            <p class="img-hint">MP4, vertical 9:16 (Instagram Reel style)</p>
+          </div>
+        </div>
+        <div class="upload-note" style="margin-top:1rem">
+          <i class="fa fa-info-circle"></i>
+          <p>Videos are stored as file URLs. For best experience save videos in <strong>videos/</strong> folder. After upload, refresh the website to see them live.</p>
+        </div>
+      </div>
+    </div>
     </div>
 
     <!-- ======= ORDERS ======= -->
@@ -374,6 +532,19 @@
               <textarea id="pm-features" rows="4" placeholder="Stronger Roots&#10;Faster Growth&#10;Better Fruits/Flowers&#10;Fertile Soil" oninput="updateTemplatePreview()"></textarea>
             </div>
             <div class="fg fg-full">
+              <label>Product Image</label>
+              <div class="pm-img-upload-wrap">
+                <div class="pm-img-preview" id="pm-img-preview">
+                  <div class="no-img-text"><i class="fa fa-image"></i><span>No image selected</span></div>
+                </div>
+                <label class="btn-upload-img">
+                  <i class="fa fa-upload"></i> Upload Product Image
+                  <input type="file" id="pm-img-file" accept="image/*" onchange="previewProductImg(this)"/>
+                </label>
+                <p class="img-hint">Recommended: Square image, min 500×500px, JPG/PNG</p>
+              </div>
+            </div>
+            <div class="fg fg-full">
               <label>Product Tagline / Slogan</label>
               <input type="text" id="pm-tagline" placeholder="e.g. Nurture Your Soil" oninput="updateTemplatePreview()"/>
             </div>
@@ -425,3 +596,6 @@
 <script src="admin-script.js"></script>
 </body>
 </html>
+
+
+
